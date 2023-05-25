@@ -15,6 +15,7 @@ include_directories(util)
 file(GLOB src-files
         ${CMAKE_SOURCE_DIR}/*.cpp
         ${CMAKE_SOURCE_DIR}/util/*.cpp
+        ${CMAKE_SOURCE_DIR}/sample/*.cpp
         )
 
 
@@ -32,4 +33,6 @@ find_library(
 
 target_link_libraries(
         studyopengl30
+        EGL
+        GLESv3
         ${log-lib})
