@@ -4,34 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.TextureMappingActivity">
 
-    <Button
-        android:id="@+id/btn_draw_triangle"
+    <com.ya.opengl.studyopengl30.MyGLSurfaceView
+        android:id="@+id/mgl_texture_mapping"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="01_绘制一个三角形"
-        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.038" />
-
-
-    <Button
-        android:id="@+id/btn_texture_mapping"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="02_纹理映射"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

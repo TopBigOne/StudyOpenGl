@@ -11,11 +11,21 @@ JNIEXPORT void JNICALL native_Init(JNIEnv *env, jobject thiz) {
     MyGLRenderContext::GetInstance();
 
 }
+/**
+ * https://juejin.cn/post/7129798779196145672
+ * reinterpret_cast:  用于进行没有任何关联之间的转换，比如一个字符指针转换为一个整形数
+ */
 extern "C"
 JNIEXPORT void JNICALL native_SetImageData(JNIEnv *env, jobject thiz,
                                            jint format, jint width,
                                            jint height,
-                                           jbyteArray bytes) {
+                                           jbyteArray imageData) {
+
+    int len = env->GetArrayLength(imageData);
+    uint8_t *buf = new uint8_t[len];
+    env->GetByteArrayRegion(imageData, 0, len, reinterpret_cast<jbyte *>(buf));
+    MyGLRenderContext::GetInstance()->SetImageData(format, width, height, buf);
+
 
 }
 extern "C"
@@ -29,7 +39,7 @@ JNIEXPORT void JNICALL native_OnSurfaceChanged(JNIEnv *env,
                                                jobject thiz,
                                                jint width,
                                                jint height) {
-    MyGLRenderContext::GetInstance()->OnSurfaceChanged(width,height);
+    MyGLRenderContext::GetInstance()->OnSurfaceChanged(width, height);
 
 }
 extern "C"
@@ -47,23 +57,26 @@ JNIEXPORT void JNICALL native_UnInit(JNIEnv *env, jobject thiz) {
 
 JNIEXPORT void JNICALL native_SetParamsInt
         (JNIEnv *env, jobject instance, jint paramType, jint value0, jint value1) {
+
+    LOGCATE("native_SetParamsInt  paramType %d :",paramType);
+
     MyGLRenderContext::GetInstance()->SetParamsInt(paramType, value0, value1);
 }
 
 static JNINativeMethod g_RenderMethods[] = {
-        {"native_Init", "()V", (void *) (native_Init)},
-        {"native_UnInit", "()V", (void *) (native_UnInit)},
-        {"native_SetImageData", "(III[B)V", (void *) (native_SetImageData)},
+        {"native_Init",             "()V",      (void *) (native_Init)},
+        {"native_UnInit",           "()V",      (void *) (native_UnInit)},
+        {"native_SetImageData",     "(III[B)V", (void *) (native_SetImageData)},
 
 //        {"native_SetImageDataWithIndex", "(IIII[B)V", (void *) (native_SetImageDataWithIndex)},
-        {"native_SetParamsInt", "(III)V", (void *) (native_SetParamsInt)},
+        {"native_SetParamsInt",     "(III)V",   (void *) (native_SetParamsInt)},
 //        {"native_SetParamsFloat", "(IFF)V", (void *) (native_SetParamsFloat)},
 //        {"native_SetAudioData", "([S)V", (void *) (native_SetAudioData)},
 //        {"native_UpdateTransformMatrix", "(FFFF)V", (void *) (native_UpdateTransformMatrix)},
 
-        {"native_OnSurfaceCreated", "()V", (void *) (native_OnSurfaceCreated)},
-        {"native_OnSurfaceChanged", "(II)V", (void *) (native_OnSurfaceChanged)},
-        {"native_OnDrawFrame", "()V", (void *) (native_OnDrawFrame)},
+        {"native_OnSurfaceCreated", "()V",      (void *) (native_OnSurfaceCreated)},
+        {"native_OnSurfaceChanged", "(II)V",    (void *) (native_OnSurfaceChanged)},
+        {"native_OnDrawFrame",      "()V",      (void *) (native_OnDrawFrame)},
 
 };
 

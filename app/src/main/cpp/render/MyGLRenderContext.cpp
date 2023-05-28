@@ -5,18 +5,41 @@
 #include "MyGLRenderContext.h"
 #include "LogUtils.h"
 
+
 MyGLRenderContext *MyGLRenderContext::m_pContext = nullptr;
 
 MyGLRenderContext::MyGLRenderContext() {
     m_pCurSample = new TriangleSample;
     m_pBeforeSample = nullptr;
 
-
 }
 
 
 void MyGLRenderContext::SetImageData(int format, int width, int height, uint8_t *pData) {
-
+    NativeImage nativeImage;
+    nativeImage.format = format;
+    nativeImage.width = width;
+    nativeImage.height = height;
+    nativeImage.ppPlane[0] = pData;
+    switch (format) {
+        case IMAGE_FORMAT_NV12:
+        case IMAGE_FORMAT_NV21:
+            LOGCATE("MyGLRenderContext::SetImageData IMAGE_FORMAT_NV12  or IMAGE_FORMAT_NV21");
+            // 图片数据index 1 的数据为= 数据index 0 的数据+ 图片的面积（ 宽x高）
+            nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
+            break;
+        case IMAGE_FORMAT_I420:
+            LOGCATE("MyGLRenderContext::SetImageData IMAGE_FORMAT_I420 ");
+            nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
+            nativeImage.ppPlane[2] = nativeImage.ppPlane[1] + width * height / 4;
+            break;
+        default:
+            break;
+    }
+    if (m_pCurSample) {
+        // 去加载图片
+        m_pCurSample->LoadImage(&nativeImage);
+    }
 }
 
 void MyGLRenderContext::SetImageDataWithIndex(int index, int format, int width, int height,
@@ -25,13 +48,16 @@ void MyGLRenderContext::SetImageDataWithIndex(int index, int format, int width, 
 }
 
 void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
-    LOGCATE("MyGLRenderContext::SetParamsInt paramType = %d, value0 = %d, value1 = %d", paramType,
+    LOGCATI("MyGLRenderContext::SetParamsInt paramType = %d, value0 = %d, value1 = %d", paramType,
             value0, value1);
     if (paramType == SAMPLE_TYPE) {
         switch (value0) {
             // 画个三角形
             case SAMPLE_TYPE_KEY_TRIANGLE:
                 m_pCurSample = new TriangleSample();
+                break;
+            case SAMPLE_TYPE_KEY_TEXTURE_MAP:
+                m_pCurSample = new TextureMapSample();
                 break;
 
 

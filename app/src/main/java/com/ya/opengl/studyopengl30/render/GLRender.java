@@ -47,28 +47,10 @@ public class GLRender {
         mNativeRender.native_SetImageData(format, width, height, bytes);
     }
 
-    public GLSurfaceView.Renderer getRenderer() {
-        return renderer;
+    public NativeRender getNativeRender() {
+        return mNativeRender;
     }
 
-
-    private GLSurfaceView.Renderer renderer = new android.opengl.GLSurfaceView.Renderer() {
-        @Override
-        public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-            mNativeRender.native_OnSurfaceCreated();
-
-        }
-
-        @Override
-        public void onSurfaceChanged(GL10 gl, int width, int height) {
-            mNativeRender.native_OnSurfaceChanged(width, height);
-        }
-
-        @Override
-        public void onDrawFrame(GL10 gl) {
-            mNativeRender.native_OnDrawFrame();
-        }
-    };
 
 
 }

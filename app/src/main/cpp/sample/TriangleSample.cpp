@@ -27,7 +27,7 @@ void TriangleSample::Init() {
 
     char vShaderStr[] =
             "#version 300 es                          \n"
-            "layout(location = 0) in vec4 vPosition;  \n"
+            "layout(location = 2) in vec4 vPosition;  \n"
             "void main()                              \n"
             "{                                        \n"
             "   gl_Position = vPosition;              \n"
@@ -65,9 +65,10 @@ void TriangleSample::Draw(int screenW, int screenH) {
         return;
     }
 
+    int vPositionIndex = 2;
     glUseProgram(m_ProgramObj);
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,vVertices1);
-    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(vPositionIndex,3,GL_FLOAT,GL_FALSE,0,vVertices1);
+    glEnableVertexAttribArray(vPositionIndex);
 
     glDrawArrays(GL_TRIANGLES,0,3);
     glUseProgram(GL_NONE);

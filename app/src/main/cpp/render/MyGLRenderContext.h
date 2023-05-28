@@ -11,6 +11,8 @@
 // 三角形
 #include <../sample/TriangleSample.h>
 
+#include <TextureMapSample.h>
+
 class MyGLRenderContext {
 public:
     MyGLRenderContext();
