@@ -96,6 +96,7 @@ protected:
     GLuint m_VertexShader;
     GLuint m_FragmentShader;
     GLuint m_ProgramObj;
+
     MySyncLock m_Lock;
     int m_SurfaceWidth;
     int m_SurfaceHeight;

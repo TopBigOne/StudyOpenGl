@@ -104,7 +104,7 @@ GLuint GLUtils::CreateProgram(const char *pVertexShaderSource, const char *pFrag
 
 
     FUN_END_TIME("GLUtils::LoadShader");
-    LOGCATE("GLUtils::CreateProgram program = %d", program);
+    LOGCATI("GLUtils::CreateProgram program = %d", program);
     return program;
 }
 
