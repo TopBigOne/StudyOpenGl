@@ -12,6 +12,7 @@
 #include <../sample/TriangleSample.h>
 
 #include <TextureMapSample.h>
+#include <NV21TextureMapSample.h>
 
 class MyGLRenderContext {
 public:

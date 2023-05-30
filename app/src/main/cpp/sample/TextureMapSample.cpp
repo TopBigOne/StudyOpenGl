@@ -143,10 +143,10 @@ void TextureMapSample::Draw(int screenW, int screenH) {
 
     // bind the rgba map;
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D,m_TextureId);
+    glBindTexture(GL_TEXTURE_2D, m_TextureId);
 
     //设置 m_SampleLoc 位置的值
-    glUniform1i(m_SampleLoc,0);
+    glUniform1i(m_SampleLoc, 0);
     // 画了啊
     // mode   :  指定绘制图元的类型
     // count  :  为绘制图元的数量乘上一个图元的顶点数。
@@ -155,7 +155,7 @@ void TextureMapSample::Draw(int screenW, int screenH) {
     // type为 : 索引值的类型,其实就是 indices 数据
     // indices : 指向索引存贮位置的指针。
     // NOTE : 使用6，是因为两个三角形，有6个顶点；
-    glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_SHORT,indices);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, indices);
 }
 
 

@@ -51,6 +51,4 @@ public class GLRender {
         return mNativeRender;
     }
 
-
-
 }

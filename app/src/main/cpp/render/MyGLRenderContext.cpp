@@ -59,6 +59,9 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
             case SAMPLE_TYPE_KEY_TEXTURE_MAP:
                 m_pCurSample = new TextureMapSample();
                 break;
+            case SAMPLE_TYPE_KEY_YUV_TEXTURE_MAP:
+                m_pCurSample = new NV21TextureMapSample();
+                break;
 
 
         }
