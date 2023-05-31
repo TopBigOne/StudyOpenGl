@@ -47,5 +47,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.259" />
 
+    <Button
+        android:id="@+id/btn_avo_vbo_render"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="04_VAO_VBO"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.329" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

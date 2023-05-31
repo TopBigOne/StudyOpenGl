@@ -13,6 +13,7 @@
 
 #include <TextureMapSample.h>
 #include <NV21TextureMapSample.h>
+#include <VaoSample.h>
 
 class MyGLRenderContext {
 public:

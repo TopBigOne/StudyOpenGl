@@ -22,7 +22,6 @@ file(GLOB src-files
         ${CMAKE_SOURCE_DIR}/util/*.cpp
         ${CMAKE_SOURCE_DIR}/sample/*.cpp
         ${CMAKE_SOURCE_DIR}/render/*.cpp
-
         )
 
 
