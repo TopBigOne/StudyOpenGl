@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.ya.opengl.studyopengl30.activity.AVO_VBO_Activity;
 import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
+import com.ya.opengl.studyopengl30.activity.FBOActivity;
 import com.ya.opengl.studyopengl30.activity.TextureMappingActivity;
 import com.ya.opengl.studyopengl30.activity.YUVRenderActivity;
 import com.ya.opengl.studyopengl30.render.GLRender;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button       btnTextureMapping;
     Button       btnYUVRender;
     Button       btnVAOVBORender;
+    Button       btnFBORender;
     List<Button> buttonList = new ArrayList<>();
 
     @Override
@@ -42,11 +44,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnTextureMapping = findViewById(R.id.btn_texture_mapping);
         btnYUVRender = findViewById(R.id.btn_yuv_render);
         btnVAOVBORender = findViewById(R.id.btn_avo_vbo_render);
+        btnFBORender = findViewById(R.id.btn_fbo_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
         buttonList.add(btnYUVRender);
         buttonList.add(btnVAOVBORender);
+        buttonList.add(btnFBORender);
 
     }
 
@@ -68,8 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_yuv_render:
                 toAnotherActivity(YUVRenderActivity.class);
                 break;
+
             case R.id.btn_avo_vbo_render:
                 toAnotherActivity(AVO_VBO_Activity.class);
+                break;
+            case R.id.btn_fbo_render:
+                toAnotherActivity(FBOActivity.class);
                 break;
 
 

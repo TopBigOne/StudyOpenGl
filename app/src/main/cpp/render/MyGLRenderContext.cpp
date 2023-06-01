@@ -33,6 +33,7 @@ void MyGLRenderContext::SetImageData(int format, int width, int height, uint8_t 
             nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
             nativeImage.ppPlane[2] = nativeImage.ppPlane[1] + width * height / 4;
             break;
+
         default:
             break;
     }
@@ -64,6 +65,9 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 break;
             case SAMPLE_TYPE_KEY_VAO:
                 m_pCurSample = new VaoSample();
+                break;
+            case SAMPLE_TYPE_KEY_FBO:
+                m_pCurSample = new FBOSample();
                 break;
 
             case SAMPLE_TYPE_KEY_FBO_BLIT:
