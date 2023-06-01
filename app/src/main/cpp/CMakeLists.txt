@@ -15,6 +15,7 @@ include_directories(
         render
         sample
         util
+        egl
 )
 
 file(GLOB src-files

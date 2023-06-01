@@ -9,7 +9,7 @@
 MyGLRenderContext *MyGLRenderContext::m_pContext = nullptr;
 
 MyGLRenderContext::MyGLRenderContext() {
-    m_pCurSample = new TriangleSample;
+    m_pCurSample    = new TriangleSample;
     m_pBeforeSample = nullptr;
 
 }
@@ -18,7 +18,7 @@ MyGLRenderContext::MyGLRenderContext() {
 void MyGLRenderContext::SetImageData(int format, int width, int height, uint8_t *pData) {
     NativeImage nativeImage;
     nativeImage.format = format;
-    nativeImage.width = width;
+    nativeImage.width  = width;
     nativeImage.height = height;
     nativeImage.ppPlane[0] = pData;
     switch (format) {
@@ -64,6 +64,10 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 break;
             case SAMPLE_TYPE_KEY_VAO:
                 m_pCurSample = new VaoSample();
+                break;
+
+            case SAMPLE_TYPE_KEY_FBO_BLIT:
+                m_pCurSample = new FBOBlitSample();
                 break;
 
         }

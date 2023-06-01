@@ -14,6 +14,7 @@
 #include <TextureMapSample.h>
 #include <NV21TextureMapSample.h>
 #include <VaoSample.h>
+#include <FBOBlitSample.h>
 
 class MyGLRenderContext {
 public:

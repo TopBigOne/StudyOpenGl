@@ -1,0 +1,10 @@
+#version 300 es
+layout (location = 0) in vec4 a_position;
+layout (location = 1) in vec2 a_texCood;
+uniform mat4 u_MVPMatrix;
+out vec2 v_texCoord; // out : 输出到下一个着色器
+
+void main() {
+    gl_Position = u_MVPMatrix * a_position;
+    v_texCoord = a_texCood;
+}

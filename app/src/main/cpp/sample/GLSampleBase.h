@@ -86,6 +86,8 @@ public:
     virtual void LoadMultiImageWithIndex(int index, NativeImage *pImage) {};
 
     virtual void LoadShortArrData(short *const pShortArr, int ArrSize) {};
+    virtual void UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY)
+    {}
 
     virtual void Init()=0;
     virtual void  Draw(int screenW,int screenH) =0;
