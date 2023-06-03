@@ -112,6 +112,9 @@ void FBOSample::Init() {
 
     m_SampleLoc     = glGetUniformLocation(m_ProgramObj, "s_TextureMap");
     m_FboSamplerLoc = glGetUniformLocation(m_FboProgramObj, "s_TextureMap");
+    LOGCATE("   Init m_SampleLoc     : %d",m_SampleLoc);
+    LOGCATE("   Init m_FboSamplerLoc : %d",m_FboSamplerLoc);
+
 
     // generate vbo
     glGenBuffers(3, m_VboIds);
@@ -281,6 +284,7 @@ void FBOSample::Draw(int screenW, int screenH) {
     glBindVertexArray(m_VaoIds[0]);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_FboTextureId);
+    // 把 m_SampleLoc 位置的值设置为 0；
     glUniform1i(m_SampleLoc, 0);
     GO_CHECK_GL_ERROR();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (const void *) 0);
