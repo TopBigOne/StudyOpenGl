@@ -101,6 +101,8 @@ void MyGLRenderContext::OnSurfaceCreated() {
 
 void MyGLRenderContext::OnSurfaceChanged(int width, int height) {
     glViewport(0, 0, width, height);
+    m_ScreenW = width;
+    m_ScreenH = height;
 }
 
 void MyGLRenderContext::OnDrawFrame() {

@@ -114,7 +114,10 @@ void FBOSample::Init() {
     m_FboSamplerLoc = glGetUniformLocation(m_FboProgramObj, "s_TextureMap");
 
     // generate vbo
-    glGenBuffers(4, m_VboIds);
+    glGenBuffers(3, m_VboIds);
+    glGenBuffers(1, &m_VeoId);
+
+
     glBindBuffer(GL_ARRAY_BUFFER, m_VboIds[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), vVertices, GL_STATIC_DRAW);
 
@@ -125,7 +128,7 @@ void FBOSample::Init() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vFboTexCoors), vFboTexCoors, GL_STATIC_DRAW);
 
     // 我理解的是指示器
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_VboIds[3]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_VeoId);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     GO_CHECK_GL_ERROR();
@@ -148,7 +151,7 @@ void FBOSample::Init() {
     glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
 
     // 指示器下标
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_VboIds[3]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_VeoId);
     GO_CHECK_GL_ERROR();
     glBindVertexArray(GL_NONE);
 
@@ -159,18 +162,20 @@ void FBOSample::Init() {
     glBindBuffer(GL_ARRAY_BUFFER, m_VboIds[0]);
     glEnableVertexAttribArray(VERTEX_POS_INDEX);
     // 解释顶点数据
-    glVertexAttribPointer(VERTEX_POS_INDEX, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),(const void *) 0);
+    glVertexAttribPointer(VERTEX_POS_INDEX, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
+                          (const void *) 0);
     // 解绑
     glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
 
     // bind vbo 2.
     glBindBuffer(GL_ARRAY_BUFFER, m_VboIds[2]);//index 2： 用于离屏渲染
     glEnableVertexAttribArray(TEXTURE_POS_INDEX);
-    glVertexAttribPointer(TEXTURE_POS_INDEX, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),(const void *) 0);
+    glVertexAttribPointer(TEXTURE_POS_INDEX, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
+                          (const void *) 0);
     glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
 
     // bind vbo 3,for index
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_VboIds[3]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_VeoId);
     GO_CHECK_GL_ERROR();
     // unbind顶点
     glBindVertexArray(GL_NONE);
@@ -182,7 +187,8 @@ void FBOSample::Init() {
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_RenderImage.width, m_RenderImage.height, 0, GL_RGBA,GL_UNSIGNED_BYTE, m_RenderImage.ppPlane[0]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_RenderImage.width, m_RenderImage.height, 0, GL_RGBA,
+                 GL_UNSIGNED_BYTE, m_RenderImage.ppPlane[0]);
     // 解绑
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
     GO_CHECK_GL_ERROR();
@@ -191,6 +197,24 @@ void FBOSample::Init() {
         LOGCATE("FBOSample::Init CreateFrameBufferObj fail");
         return;
     }
+}
+
+void
+FBOSample::initVBO(const GLfloat *vVertices, const GLfloat *vTexCoors, const GLfloat *vFboTexCoors,
+                   const GLushort *indices) {// generate vbo
+    glGenBuffers(4, m_VboIds);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VboIds[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), vVertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, m_VboIds[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vTexCoors), vTexCoors, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, m_VboIds[2]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vFboTexCoors), vFboTexCoors, GL_STATIC_DRAW);
+
+    // 我理解的是指示器
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_VeoId);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 }
 
 bool FBOSample::CreateFrameBufferObj() {
@@ -204,9 +228,9 @@ bool FBOSample::CreateFrameBufferObj() {
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
 
 
-    glGenFramebuffers(1,&m_FboId);
-    glBindFramebuffer(GL_FRAMEBUFFER,m_FboId);
-    glBindTexture(GL_TEXTURE_2D,m_FboTextureId);
+    glGenFramebuffers(1, &m_FboId);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_FboId);
+    glBindTexture(GL_TEXTURE_2D, m_FboTextureId);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_FboTextureId, 0);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_RenderImage.width, m_RenderImage.height, 0, GL_RGBA,
                  GL_UNSIGNED_BYTE, nullptr);
@@ -234,6 +258,7 @@ void FBOSample::Draw(int screenW, int screenH) {
     // 设置当前VAO，之后所有操作
     // (注意：这些操作必须是上文VAO中包含的内容所注明的调用，
     // 其他非VAO中存储的内容即使调用了也不会影响VAO）存储在该VAO中
+    // m_VaoIds[1]: 表示使用的是
     glBindVertexArray(m_VaoIds[1]);
     glActiveTexture(GL_TEXTURE0);
     // m_ImageTextureId 不用区分十分使用了离屏渲染
