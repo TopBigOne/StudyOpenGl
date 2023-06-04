@@ -20,9 +20,7 @@ public class GLRender {
     private NativeRender mNativeRender;
     private int          mSampleType;
 
-    static {
-        System.loadLibrary("studyopengl30");
-    }
+
 
     public GLRender() {
         this.mNativeRender = new NativeRender();

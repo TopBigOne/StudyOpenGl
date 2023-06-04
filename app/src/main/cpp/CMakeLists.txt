@@ -23,6 +23,7 @@ file(GLOB src-files
         ${CMAKE_SOURCE_DIR}/util/*.cpp
         ${CMAKE_SOURCE_DIR}/sample/*.cpp
         ${CMAKE_SOURCE_DIR}/render/*.cpp
+        ${CMAKE_SOURCE_DIR}/egl/*.cpp
         )
 
 
@@ -42,4 +43,6 @@ target_link_libraries(
         studyopengl30
         EGL
         GLESv3
-        ${log-lib})
+        ${log-lib}
+        android
+)

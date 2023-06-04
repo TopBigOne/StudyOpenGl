@@ -13,12 +13,17 @@ import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
 import com.ya.opengl.studyopengl30.activity.FBOActivity;
 import com.ya.opengl.studyopengl30.activity.TextureMappingActivity;
 import com.ya.opengl.studyopengl30.activity.YUVRenderActivity;
+import com.ya.opengl.studyopengl30.egl.EGLActivity;
 import com.ya.opengl.studyopengl30.render.GLRender;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    static {
+        System.loadLibrary("studyopengl30");
+    }
 
     private static final String TAG = "MainActivity: ";
 
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button       btnYUVRender;
     Button       btnVAOVBORender;
     Button       btnFBORender;
+    Button       btnEGLRender;
     List<Button> buttonList = new ArrayList<>();
 
     @Override
@@ -45,12 +51,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnYUVRender = findViewById(R.id.btn_yuv_render);
         btnVAOVBORender = findViewById(R.id.btn_avo_vbo_render);
         btnFBORender = findViewById(R.id.btn_fbo_render);
+        btnEGLRender = findViewById(R.id.btn_egl_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
         buttonList.add(btnYUVRender);
         buttonList.add(btnVAOVBORender);
         buttonList.add(btnFBORender);
+        buttonList.add(btnEGLRender);
 
     }
 
@@ -78,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_fbo_render:
                 toAnotherActivity(FBOActivity.class);
+                break;
+            case R.id.btn_egl_render:
+                toAnotherActivity(EGLActivity.class);
                 break;
 
 

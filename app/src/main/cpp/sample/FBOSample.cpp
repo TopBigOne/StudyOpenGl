@@ -252,11 +252,13 @@ bool FBOSample::CreateFrameBufferObj() {
 
 void FBOSample::Draw(int screenW, int screenH) {
     LOGCATD("FBOSample ::Draw  start");
+    // 设置像素存储模式 https://blog.csdn.net/flycatdeng/article/details/82667285
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glViewport(0, 0, m_RenderImage.width, m_RenderImage.height);
 
     // start off-screen render
     glBindFramebuffer(GL_FRAMEBUFFER, m_FboId);
+    // 用于灰度操作
     glUseProgram(m_FboProgramObj);
     // 设置当前VAO，之后所有操作
     // (注意：这些操作必须是上文VAO中包含的内容所注明的调用，
@@ -264,7 +266,7 @@ void FBOSample::Draw(int screenW, int screenH) {
     // m_VaoIds[1]: 表示使用的是
     glBindVertexArray(m_VaoIds[1]);
     glActiveTexture(GL_TEXTURE0);
-    // m_ImageTextureId 不用区分十分使用了离屏渲染
+    // m_ImageTextureId 不用区分是否使用了离屏渲染
     glBindTexture(GL_TEXTURE_2D, m_ImageTextureId);
     glUniform1i(m_FboSamplerLoc, 0);
 
