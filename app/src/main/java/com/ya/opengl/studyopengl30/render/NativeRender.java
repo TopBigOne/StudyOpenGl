@@ -105,4 +105,9 @@ public class NativeRender {
         mSampleType = sampleType;
 
     }
+
+    public void setTouchLoc(float touchX, float touchY) {
+        native_SetParamsFloat(SAMPLE_TYPE_SET_TOUCH_LOC, touchX, touchY);
+
+    }
 }

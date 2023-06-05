@@ -73,6 +73,20 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
             case SAMPLE_TYPE_KEY_FBO_BLIT:
                 m_pCurSample = new FBOBlitSample();
                 break;
+            case SAMPLE_TYPE_KEY_FBO_LEG_LENGTHEN:
+                //  m_pCurSample = new FBOLegLengthenSample();
+            case SAMPLE_TYPE_KEY_COORD_SYSTEM:
+                   m_pCurSample = new CoordSystemSample();
+                break;
+
+            case SAMPLE_TYPE_KEY_BASIC_LIGHTING:
+                //  m_pCurSample = new BasicLightingSample();
+                break;
+
+            case SAMPLE_TYPE_KEY_TRANSFORM_FEEDBACK:
+                m_pCurSample = new TransformFeedbackSample();
+                break;
+
 
         }
     }
@@ -90,6 +104,10 @@ void MyGLRenderContext::SetParamsShortArr(short *const pShortArr, int arrSize) {
 
 void
 MyGLRenderContext::UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY) {
+    LOGCATI("MyGLRenderContext::UpdateTransformMatrix [rotateX, rotateY, scaleX, scaleY] = [%f, %f, %f, %f]", rotateX, rotateY, scaleX, scaleY);
+    if(m_pCurSample){
+        m_pCurSample->UpdateTransformMatrix(rotateX, rotateY, scaleX, scaleY);
+    }
 
 }
 

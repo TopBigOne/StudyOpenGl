@@ -62,6 +62,7 @@ public class MyGLSurfaceView extends GLSurfaceView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getPointerCount() == 1) {
+            consumeTouchEvent(event);
             long currentTimeMillis = System.currentTimeMillis();
             if ((currentTimeMillis - mLastMultiTouchTime > 200)) {
                 float x = event.getX();
@@ -107,6 +108,72 @@ public class MyGLSurfaceView extends GLSurfaceView {
         return true;
     }
 
+    private void consumeTouchEvent(MotionEvent e) {
+        dealClickEvent(e);
+        float touchX = -1, touchY = -1;
+        switch (e.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+                touchX = e.getX();
+                touchY = e.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                touchX = -1;
+                touchY = -1;
+                break;
+            default:
+                break;
+        }
+
+        //滑动、触摸
+        switch (mNativeRender.getSampleType()) {
+            case SAMPLE_TYPE_KEY_SCRATCH_CARD:
+                mNativeRender.setTouchLoc(touchX, touchY);
+                requestRender();
+                break;
+            default:
+                break;
+        }
+
+        //点击
+        switch (e.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+                //touchX = e.getX();
+                //touchY = e.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
+    public void dealClickEvent(MotionEvent e) {
+        float touchX = -1, touchY = -1;
+        switch (e.getAction()) {
+            case MotionEvent.ACTION_UP:
+                touchX = e.getX();
+                touchY = e.getY();
+            {
+                //点击
+                switch (mNativeRender.getSampleType()) {
+                    case SAMPLE_TYPE_KEY_SHOCK_WAVE:
+                        mNativeRender.setTouchLoc(touchX, touchY);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            break;
+            default:
+                break;
+        }
+    }
+
     private GLSurfaceView.Renderer renderer = new android.opengl.GLSurfaceView.Renderer() {
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -143,17 +210,42 @@ public class MyGLSurfaceView extends GLSurfaceView {
     private ScaleGestureDetector.OnScaleGestureListener scaleGestureListener = new ScaleGestureDetector.SimpleOnScaleGestureListener() {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
-            return super.onScale(detector);
+            switch (mNativeRender.getSampleType()) {
+                case SAMPLE_TYPE_COORD_SYSTEM:
+                case SAMPLE_TYPE_BASIC_LIGHTING:
+                case SAMPLE_TYPE_INSTANCING:
+                case SAMPLE_TYPE_3D_MODEL:
+                case SAMPLE_TYPE_KEY_VISUALIZE_AUDIO:
+                case SAMPLE_TYPE_KEY_TEXT_RENDER:
+                {
+                    float preSpan = detector.getPreviousSpan();
+                    float curSpan = detector.getCurrentSpan();
+                    if (curSpan < preSpan) {
+                        mCurScale = mPreScale - (preSpan - curSpan) / 200;
+                    } else {
+                        mCurScale = mPreScale + (curSpan - preSpan) / 200;
+                    }
+                    mCurScale = Math.max(0.05f, Math.min(mCurScale, 80.0f));
+                    mNativeRender.updateTransformMatrix(mXAngle, mYAngle, mCurScale, mCurScale);
+                    requestRender();
+                }
+                break;
+                default:
+                    break;
+            }
+
+            return false;
         }
 
         @Override
         public boolean onScaleBegin(ScaleGestureDetector detector) {
-            return super.onScaleBegin(detector);
+            return true;
         }
 
         @Override
         public void onScaleEnd(ScaleGestureDetector detector) {
-            super.onScaleEnd(detector);
+            mPreScale = mCurScale;
+            mLastMultiTouchTime = System.currentTimeMillis();
         }
     };
 }

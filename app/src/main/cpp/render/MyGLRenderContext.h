@@ -17,6 +17,11 @@
 #include <FBOSample.h>
 #include <FBOBlitSample.h>
 
+#include <TransformFeedbackSample.h>
+#include <FBOLegLengthenSample.h>
+#include <CoordSystemSample.h>
+#include <BasicLightingSample.h>
+
 class MyGLRenderContext {
 public:
     MyGLRenderContext();
@@ -49,10 +54,10 @@ public:
 
 private:
     static MyGLRenderContext *m_pContext;
-    GLSampleBase *m_pBeforeSample;
-    GLSampleBase *m_pCurSample;
-    int m_ScreenW;
-    int m_ScreenH;
+    GLSampleBase             *m_pBeforeSample;
+    GLSampleBase             *m_pCurSample;
+    int                      m_ScreenW;
+    int                      m_ScreenH;
 };
 
 

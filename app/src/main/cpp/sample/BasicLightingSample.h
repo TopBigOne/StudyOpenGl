@@ -1,0 +1,14 @@
+//
+// Created by dev on 2023/6/5.
+//
+
+#ifndef STUDYOPENGL3_0_BASICLIGHTINGSAMPLE_H
+#define STUDYOPENGL3_0_BASICLIGHTINGSAMPLE_H
+
+
+class BasicLightingSample {
+
+};
+
+
+#endif //STUDYOPENGL3_0_BASICLIGHTINGSAMPLE_H

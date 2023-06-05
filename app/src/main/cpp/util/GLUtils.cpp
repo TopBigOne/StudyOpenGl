@@ -119,7 +119,7 @@ GLUtils::CreateProgramWithFeedback(const char *pVertexShaderSource, const char *
             return program;
         }
 
-        fragShaderHandle = LoadShader(GL_VERTEX_SHADER, pFragmentSource);
+        fragShaderHandle = LoadShader(GL_FRAGMENT_SHADER, pFragmentSource);
         if (!fragShaderHandle) {
             return program;
         }
@@ -162,13 +162,8 @@ GLUtils::CreateProgramWithFeedback(const char *pVertexShaderSource, const char *
             }
 
         }
-
-
-        glLinkProgram(program);
-
-
     FUN_END_TIME("GLUtils::CreateProgramWithFeedback");
-    LOGCATE("GLUtils::CreateProgramWithFeedback program = %d", program);
+    LOGCATI("GLUtils::CreateProgramWithFeedback program = %d", program);
     return program;
 
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ya.opengl.studyopengl30.activity.AVO_VBO_Activity;
+import com.ya.opengl.studyopengl30.activity.CoordSystemActivity;
 import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
 import com.ya.opengl.studyopengl30.activity.FBOActivity;
 import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
@@ -29,14 +30,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "MainActivity: ";
 
-    Button       btnDrawTriangle;
-    Button       btnTextureMapping;
-    Button       btnYUVRender;
-    Button       btnVAOVBORender;
-    Button       btnFBORender;
-    Button       btnEGLRender;
-    Button       btnTransformFeedbackRender;
-    Button       btnMultiLightsRender;
+    Button btnDrawTriangle;
+    Button btnTextureMapping;
+    Button btnYUVRender;
+    Button btnVAOVBORender;
+    Button btnFBORender;
+    Button btnEGLRender;
+    Button btnTransformFeedbackRender;
+    Button btnMultiLightsRender;
+    Button btnCoordSystemRender;
+
+
     List<Button> buttonList = new ArrayList<>();
 
     @Override
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnEGLRender = findViewById(R.id.btn_egl_render);
         btnTransformFeedbackRender = findViewById(R.id.btn_transform_feedback_render);
         btnMultiLightsRender = findViewById(R.id.btn_multi_lights_render);
+        btnCoordSystemRender = findViewById(R.id.btn_coord_system_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnEGLRender);
         buttonList.add(btnTransformFeedbackRender);
         buttonList.add(btnMultiLightsRender);
+        buttonList.add(btnCoordSystemRender);
 
     }
 
@@ -103,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_transform_feedback_render:
                 toAnotherActivity(TransformFeedbackActivity.class);
+                break;
+            case R.id.btn_coord_system_render:
+                toAnotherActivity(CoordSystemActivity.class);
                 break;
 
 
