@@ -1,5 +1,7 @@
 package com.ya.opengl.studyopengl30.render;
 
+import android.util.Log;
+
 /**
  * @author :top
  * @version :
@@ -8,7 +10,11 @@ package com.ya.opengl.studyopengl30.render;
  */
 public class NativeRender {
 
-    public static final int SAMPLE_TYPE  =  200;
+    private static final String TAG = "NativeRender :";
+
+    private int mSampleType;
+
+    public static final int SAMPLE_TYPE = 200;
 
     public static final int SAMPLE_TYPE_TRIANGLE                = SAMPLE_TYPE;
     public static final int SAMPLE_TYPE_TEXTURE_MAP             = SAMPLE_TYPE + 1;
@@ -58,8 +64,8 @@ public class NativeRender {
     public static final int SAMPLE_TYPE_KEY_RGB2I444            = SAMPLE_TYPE + 45;
     public static final int SAMPLE_TYPE_KEY_HWBuffer            = SAMPLE_TYPE + 46;
 
-    public static final int SAMPLE_TYPE_SET_TOUCH_LOC           = SAMPLE_TYPE + 999;
-    public static final int SAMPLE_TYPE_SET_GRAVITY_XY          = SAMPLE_TYPE + 1000;
+    public static final int SAMPLE_TYPE_SET_TOUCH_LOC  = SAMPLE_TYPE + 999;
+    public static final int SAMPLE_TYPE_SET_GRAVITY_XY = SAMPLE_TYPE + 1000;
 
     public native void native_Init();
 
@@ -82,4 +88,21 @@ public class NativeRender {
     public native void native_OnSurfaceChanged(int width, int height);
 
     public native void native_OnDrawFrame();
+
+
+    public int getSampleType() {
+        Log.i(TAG, "getSampleType: step 2");
+        return mSampleType;
+    }
+
+    public void updateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY) {
+        native_UpdateTransformMatrix(rotateX, rotateY, scaleX, scaleY);
+    }
+
+
+    public void setSampleType(int sampleType) {
+        Log.i(TAG, "setSampleType: step 1");
+        mSampleType = sampleType;
+
+    }
 }

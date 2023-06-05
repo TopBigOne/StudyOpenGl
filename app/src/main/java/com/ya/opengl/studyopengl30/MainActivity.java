@@ -11,7 +11,9 @@ import android.widget.Button;
 import com.ya.opengl.studyopengl30.activity.AVO_VBO_Activity;
 import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
 import com.ya.opengl.studyopengl30.activity.FBOActivity;
+import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
 import com.ya.opengl.studyopengl30.activity.TextureMappingActivity;
+import com.ya.opengl.studyopengl30.activity.TransformFeedbackActivity;
 import com.ya.opengl.studyopengl30.activity.YUVRenderActivity;
 import com.ya.opengl.studyopengl30.egl.EGLActivity;
 import com.ya.opengl.studyopengl30.render.GLRender;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button       btnVAOVBORender;
     Button       btnFBORender;
     Button       btnEGLRender;
+    Button       btnTransformFeedbackRender;
+    Button       btnMultiLightsRender;
     List<Button> buttonList = new ArrayList<>();
 
     @Override
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnVAOVBORender = findViewById(R.id.btn_avo_vbo_render);
         btnFBORender = findViewById(R.id.btn_fbo_render);
         btnEGLRender = findViewById(R.id.btn_egl_render);
+        btnTransformFeedbackRender = findViewById(R.id.btn_transform_feedback_render);
+        btnMultiLightsRender = findViewById(R.id.btn_multi_lights_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -59,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnVAOVBORender);
         buttonList.add(btnFBORender);
         buttonList.add(btnEGLRender);
+        buttonList.add(btnTransformFeedbackRender);
+        buttonList.add(btnMultiLightsRender);
 
     }
 
@@ -89,6 +97,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_egl_render:
                 toAnotherActivity(EGLActivity.class);
+
+            case R.id.btn_multi_lights_render:
+                toAnotherActivity(MultiLightsActivity.class);
+                break;
+            case R.id.btn_transform_feedback_render:
+                toAnotherActivity(TransformFeedbackActivity.class);
                 break;
 
 

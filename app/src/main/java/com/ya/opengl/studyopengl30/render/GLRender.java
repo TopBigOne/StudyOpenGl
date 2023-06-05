@@ -20,8 +20,6 @@ public class GLRender {
     private NativeRender mNativeRender;
     private int          mSampleType;
 
-
-
     public GLRender() {
         this.mNativeRender = new NativeRender();
     }
@@ -38,6 +36,7 @@ public class GLRender {
         if (paramType == SAMPLE_TYPE) {
             mSampleType = value0;
         }
+        mNativeRender.setSampleType(mSampleType);
         mNativeRender.native_SetParamsInt(paramType, value0, value1);
     }
 
