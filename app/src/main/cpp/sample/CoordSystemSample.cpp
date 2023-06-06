@@ -130,6 +130,7 @@ void CoordSystemSample::Init() {
     glBindVertexArray(GL_NONE);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_TextureId);
+    //  根据指定参数，生成一个2D 纹理。
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_RenderImage.width, m_RenderImage.height, 0, GL_RGBA,
                  GL_UNSIGNED_BYTE, m_RenderImage.ppPlane[0]);
     glBindTexture(GL_TEXTURE_2D, GL_NONE);
@@ -170,6 +171,13 @@ void CoordSystemSample::Destroy() {
 }
 
 
+/**
+ * java 层传递过来的手势数据
+ * @param rotateX
+ * @param rotateY
+ * @param scaleX
+ * @param scaleY
+ */
 void
 CoordSystemSample::UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY) {
     GLSampleBase::UpdateTransformMatrix(rotateX, rotateY, scaleX, scaleY);
@@ -182,7 +190,9 @@ CoordSystemSample::UpdateTransformMatrix(float rotateX, float rotateY, float sca
 
 
 /**
- *
+ * OpenGL 3D 效果最简单的方式是在顶点着色器中将顶点坐标与 MVP 变换矩阵相乘：
+ * 在绘制之前构建变换矩阵：
+ * NOTE: 这个函数其实就是给 mvpMartrix 赋值的。
  * @param rotateX   绕X轴旋转度数
  * @param rotateY   绕Y轴旋转度数
  * @param scaleX
@@ -192,24 +202,31 @@ void
 CoordSystemSample::UpdateMVPMatrix(glm::mat4 &mvpMartrix, int angleX, int angleY, float ratio) {
     LOGCATI("CoordSystemSample::UpdateMVPMatrix angleX = %d, angleY = %d, ratio = %f", angleX,
             angleY, ratio);
+
+
     angleX = angleX % 360;
     angleY = angleY % 360;
     // 转化为弧度角
     auto      radianX    = static_cast<float>(MATH_PI / 180.f * angleX);
     auto      radianY    = static_cast<float>(MATH_PI / 180.f * angleY);
     // 透视投影矩阵
+    // 第三、四个参数分别为近平面和远平面的深度。
     glm::mat4 ProjectionMat4 = glm::perspective(45.0f, ratio, 0.1f, 100.f);
 
     // view matrix
     glm::mat4 ViewMat4  = glm::lookAt(
-            glm::vec3(0, 0, 4),// camera is at(0,0,1) in World Space.
-            glm::vec3(0, 0, 0),//  and looks at origin
-            glm::vec3(0, 1, 0)//  and looks at origin
+            glm::vec3(0, 0, 4),// camera is at(0,0,1) in World Space. 参数 eye  是 world space 中摄像机的坐标位置，
+            glm::vec3(0, 0, 0),//  and looks at origin   是 world space 中摄像机指向的点，
+            glm::vec3(0, 1, 0)//  and looks at origin  -    是指向上方的向量，通常是 (0, 0, 1) 。
                                  );
     glm::mat4 ModelMat4 = glm::mat4(1.0f);
+    // 缩放
     ModelMat4  = glm::scale(ModelMat4, glm::vec3(m_ScaleX, m_ScaleY, 1.0f));
+    // 围绕x轴旋转
     ModelMat4  = glm::rotate(ModelMat4, radianX, glm::vec3(1.0f, 1.0f, 0.0f));
+    // 围绕y轴旋转
     ModelMat4  = glm::rotate(ModelMat4, radianY, glm::vec3(0.0f, 1.0f, 0.0f));
+    // 平移变换
     ModelMat4  = glm::translate(ModelMat4, glm::vec3(0.0f, 0.0f, 0.0f));
     mvpMartrix = ProjectionMat4 * ViewMat4 * ModelMat4;
 
