@@ -154,6 +154,8 @@ public class MyGLSurfaceView extends GLSurfaceView {
 
     public void dealClickEvent(MotionEvent e) {
         float touchX = -1, touchY = -1;
+
+
         switch (e.getAction()) {
             case MotionEvent.ACTION_UP:
                 touchX = e.getX();
@@ -216,8 +218,7 @@ public class MyGLSurfaceView extends GLSurfaceView {
                 case SAMPLE_TYPE_INSTANCING:
                 case SAMPLE_TYPE_3D_MODEL:
                 case SAMPLE_TYPE_KEY_VISUALIZE_AUDIO:
-                case SAMPLE_TYPE_KEY_TEXT_RENDER:
-                {
+                case SAMPLE_TYPE_KEY_TEXT_RENDER: {
                     float preSpan = detector.getPreviousSpan();
                     float curSpan = detector.getCurrentSpan();
                     if (curSpan < preSpan) {

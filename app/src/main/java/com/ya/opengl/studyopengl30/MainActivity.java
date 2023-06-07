@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ya.opengl.studyopengl30.activity.AVO_VBO_Activity;
+import com.ya.opengl.studyopengl30.activity.BasicLightingActivity;
 import com.ya.opengl.studyopengl30.activity.CoordSystemActivity;
 import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
 import com.ya.opengl.studyopengl30.activity.FBOActivity;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnTransformFeedbackRender;
     Button btnMultiLightsRender;
     Button btnCoordSystemRender;
+    Button btnBasicLightingRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnTransformFeedbackRender = findViewById(R.id.btn_transform_feedback_render);
         btnMultiLightsRender = findViewById(R.id.btn_multi_lights_render);
         btnCoordSystemRender = findViewById(R.id.btn_coord_system_render);
+        btnBasicLightingRender = findViewById(R.id.btn_basic_lighting_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnTransformFeedbackRender);
         buttonList.add(btnMultiLightsRender);
         buttonList.add(btnCoordSystemRender);
+        buttonList.add(btnBasicLightingRender);
 
     }
 
@@ -113,6 +117,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_coord_system_render:
                 toAnotherActivity(CoordSystemActivity.class);
                 break;
+            case R.id.btn_basic_lighting_render:
+                // 光照基础
+                toAnotherActivity(BasicLightingActivity.class);
+                break;
+
+
 
 
             default:

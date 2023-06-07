@@ -80,13 +80,12 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 break;
 
             case SAMPLE_TYPE_KEY_BASIC_LIGHTING:
-                //  m_pCurSample = new BasicLightingSample();
+                  m_pCurSample = new BasicLightingSample();
                 break;
 
             case SAMPLE_TYPE_KEY_TRANSFORM_FEEDBACK:
                 m_pCurSample = new TransformFeedbackSample();
                 break;
-
 
         }
     }
