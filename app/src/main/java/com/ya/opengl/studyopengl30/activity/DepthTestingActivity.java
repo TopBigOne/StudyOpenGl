@@ -3,7 +3,7 @@ package com.ya.opengl.studyopengl30.activity;
 import static com.ya.opengl.studyopengl30.MyGLSurfaceView.IMAGE_FORMAT_RGBA;
 import static com.ya.opengl.studyopengl30.render.NativeRender.SAMPLE_TYPE;
 import static com.ya.opengl.studyopengl30.render.NativeRender.SAMPLE_TYPE_BASIC_LIGHTING;
-import static com.ya.opengl.studyopengl30.render.NativeRender.SAMPLE_TYPE_COORD_SYSTEM;
+import static com.ya.opengl.studyopengl30.render.NativeRender.SAMPLE_TYPE_DEPTH_TESTING;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,29 +20,29 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 /**
- * 光照基础
+ * 深度测试： https://blog.csdn.net/Kennethdroid/article/details/101709694
  */
-public class BasicLightingActivity extends AppCompatActivity {
+public class DepthTestingActivity extends AppCompatActivity {
+
     private MyGLSurfaceView myGLSurfaceView;
-    private  GLRender        glRender;
+    private   GLRender        glRender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basic_lighting);
+        setContentView(R.layout.activity_depth_testing);
 
-        myGLSurfaceView = findViewById(R.id.mgl_basic_lighting_render);
+        myGLSurfaceView = findViewById(R.id.mgl_depth_test_render);
 
         glRender = new GLRender();
         glRender.init();
 
-        glRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE_BASIC_LIGHTING, 0);
+        glRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE_DEPTH_TESTING, 0);
         myGLSurfaceView.setNativeRender(glRender.getNativeRender());
-        loadRGBAImage(R.mipmap.board_texture);
+         loadRGBAImage(R.mipmap.board_texture);
 
         myGLSurfaceView.requestRender();
     }
-
 
     private Bitmap loadRGBAImage(int resId) {
         InputStream is = this.getResources().openRawResource(resId);
@@ -56,10 +56,15 @@ public class BasicLightingActivity extends AppCompatActivity {
                 byte[] byteArray = buf.array();
                 glRender.setImageData(IMAGE_FORMAT_RGBA, bitmap.getWidth(), bitmap.getHeight(), byteArray);
             }
-        } finally {
-            try {
+        }
+        finally
+        {
+            try
+            {
                 is.close();
-            } catch (IOException e) {
+            }
+            catch(IOException e)
+            {
                 e.printStackTrace();
             }
         }

@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.ya.opengl.studyopengl30.activity.AVO_VBO_Activity;
 import com.ya.opengl.studyopengl30.activity.BasicLightingActivity;
 import com.ya.opengl.studyopengl30.activity.CoordSystemActivity;
+import com.ya.opengl.studyopengl30.activity.DepthTestingActivity;
 import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
 import com.ya.opengl.studyopengl30.activity.FBOActivity;
 import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnMultiLightsRender;
     Button btnCoordSystemRender;
     Button btnBasicLightingRender;
+    Button btnDepthTestRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -67,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnCoordSystemRender = findViewById(R.id.btn_coord_system_render);
         btnBasicLightingRender = findViewById(R.id.btn_basic_lighting_render);
 
+        btnDepthTestRender = findViewById(R.id.btn_depth_test_render);
+
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
         buttonList.add(btnYUVRender);
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnMultiLightsRender);
         buttonList.add(btnCoordSystemRender);
         buttonList.add(btnBasicLightingRender);
+        buttonList.add(btnDepthTestRender);
 
     }
 
@@ -121,9 +126,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 光照基础
                 toAnotherActivity(BasicLightingActivity.class);
                 break;
-
-
-
+            case R.id.btn_depth_test_render:
+                // 深度测试
+                toAnotherActivity(DepthTestingActivity.class);
+                break;
 
             default:
         }

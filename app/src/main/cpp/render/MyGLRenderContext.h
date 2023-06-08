@@ -21,6 +21,7 @@
 #include <FBOLegLengthenSample.h>
 #include <CoordSystemSample.h>
 #include <BasicLightingSample.h>
+#include <DepthTestingSample.h>
 
 class MyGLRenderContext {
 public:
