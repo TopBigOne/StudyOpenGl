@@ -52,6 +52,8 @@ public class MyGLSurfaceView extends GLSurfaceView {
     public MyGLSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setEGLContextClientVersion(3);
+        //最后 2 个参数表示分别配置 16 位的深度缓冲区和模板缓冲区
+        setEGLConfigChooser(8, 8, 8, 8, 16, 8);
         setRenderer(renderer);
         setRenderMode(RENDERMODE_WHEN_DIRTY);
 

@@ -32,6 +32,12 @@ public:
     static void CheckGLError(const char *pGLOperation);
 
 
+    static void setMat4(GLuint programId, const std::string &name, const glm::mat4 &mat) {
+        glUniformMatrix4fv(glGetUniformLocation(programId, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+    }
+
+
+
 };
 
 

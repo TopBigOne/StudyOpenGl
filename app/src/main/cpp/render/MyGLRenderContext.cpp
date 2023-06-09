@@ -4,6 +4,7 @@
 
 #include "MyGLRenderContext.h"
 #include "LogUtils.h"
+#include "StencilTestingSample.h"
 
 
 MyGLRenderContext *MyGLRenderContext::m_pContext = nullptr;
@@ -88,6 +89,9 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 break;
             case SAMPLE_TYPE_KEY_DEPTH_TESTING:
                 m_pCurSample = new DepthTestingSample();
+            case SAMPLE_TYPE_KEY_STENCIL_TESTING:
+                // 模板测试
+                m_pCurSample = new StencilTestingSample();
 
         }
     }
