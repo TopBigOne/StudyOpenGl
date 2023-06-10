@@ -46,6 +46,31 @@ void MyGLRenderContext::SetImageData(int format, int width, int height, uint8_t 
 
 void MyGLRenderContext::SetImageDataWithIndex(int index, int format, int width, int height,
                                               uint8_t *pData) {
+    LOGCATI("MyGLRenderContext::SetImageDataWithIndex index=%d, format=%d, width=%d, height=%d, pData=%p", index, format, width, height, pData);
+    NativeImage nativeImage;
+    nativeImage.format = format;
+    nativeImage.width = width;
+    nativeImage.height = height;
+    nativeImage.ppPlane[0] = pData;
+
+    switch (format)
+    {
+        case IMAGE_FORMAT_NV12:
+        case IMAGE_FORMAT_NV21:
+            nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
+            break;
+        case IMAGE_FORMAT_I420:
+            nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
+            nativeImage.ppPlane[2] = nativeImage.ppPlane[1] + width * height / 4;
+            break;
+        default:
+            break;
+    }
+
+    if (m_pCurSample)
+    {
+        m_pCurSample->LoadMultiImageWithIndex(index, &nativeImage);
+    }
 
 }
 
@@ -92,6 +117,9 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
             case SAMPLE_TYPE_KEY_STENCIL_TESTING:
                 // 模板测试
                 m_pCurSample = new StencilTestingSample();
+            case SAMPLE_TYPE_KEY_BLENDING:
+                // 片元颜色混合
+                m_pCurSample = new BlendingSample();
 
         }
     }

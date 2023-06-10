@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.ya.opengl.studyopengl30.activity.AVO_VBO_Activity;
 import com.ya.opengl.studyopengl30.activity.BasicLightingActivity;
+import com.ya.opengl.studyopengl30.activity.BlendingActivity;
 import com.ya.opengl.studyopengl30.activity.CoordSystemActivity;
 import com.ya.opengl.studyopengl30.activity.DepthTestingActivity;
 import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnBasicLightingRender;
     Button btnDepthTestRender;
     Button btnStencilTestRender;
+    Button btnBlendingRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnDepthTestRender = findViewById(R.id.btn_depth_test_render);
         btnStencilTestRender = findViewById(R.id.btn_stencil_test_render);
+        btnBlendingRender = findViewById(R.id.btn_blending_test_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnBasicLightingRender);
         buttonList.add(btnDepthTestRender);
         buttonList.add(btnStencilTestRender);
+        buttonList.add(btnBlendingRender);
 
     }
 
@@ -137,6 +141,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_stencil_test_render:
                 // 深度测试
                 toAnotherActivity(StencilTestingActivity.class);
+                break;
+            case R.id.btn_blending_test_render:
+                // 深度测试
+                toAnotherActivity(BlendingActivity.class);
                 break;
 
 

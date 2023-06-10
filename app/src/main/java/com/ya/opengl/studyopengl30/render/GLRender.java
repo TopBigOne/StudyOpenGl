@@ -43,6 +43,9 @@ public class GLRender {
     public void setImageData(int format, int width, int height, byte[] bytes) {
         mNativeRender.native_SetImageData(format, width, height, bytes);
     }
+    public void setImageDataWithIndex(int index, int format, int width, int height, byte[] bytes) {
+        mNativeRender.native_SetImageDataWithIndex(index, format, width, height, bytes);
+    }
 
     public NativeRender getNativeRender() {
         return mNativeRender;

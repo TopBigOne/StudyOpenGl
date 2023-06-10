@@ -22,6 +22,7 @@
 #include <CoordSystemSample.h>
 #include <BasicLightingSample.h>
 #include <DepthTestingSample.h>
+#include <BlendingSample.h>
 
 class MyGLRenderContext {
 public:
