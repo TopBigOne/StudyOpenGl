@@ -121,8 +121,8 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 m_pCurSample = new BlendingSample();
                 break;
             case SAMPLE_TYPE_KEY_INSTANCING:
-                // m_pCurSample = new Instancing3DSample();
-                m_pCurSample = new InstancingSample();
+                 m_pCurSample = new Instancing3DSample();
+                // m_pCurSample = new InstancingSample();
                 break;
 
         }

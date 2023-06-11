@@ -24,6 +24,7 @@
 #include <DepthTestingSample.h>
 #include <BlendingSample.h>
 #include <InstancingSample.h>
+#include <Instancing3DSample.h>
 
 class MyGLRenderContext {
 public:
