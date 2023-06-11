@@ -46,15 +46,15 @@ void MyGLRenderContext::SetImageData(int format, int width, int height, uint8_t 
 
 void MyGLRenderContext::SetImageDataWithIndex(int index, int format, int width, int height,
                                               uint8_t *pData) {
-    LOGCATI("MyGLRenderContext::SetImageDataWithIndex index=%d, format=%d, width=%d, height=%d, pData=%p", index, format, width, height, pData);
+    LOGCATI("MyGLRenderContext::SetImageDataWithIndex index=%d, format=%d, width=%d, height=%d, pData=%p",
+            index, format, width, height, pData);
     NativeImage nativeImage;
     nativeImage.format = format;
-    nativeImage.width = width;
+    nativeImage.width  = width;
     nativeImage.height = height;
     nativeImage.ppPlane[0] = pData;
 
-    switch (format)
-    {
+    switch (format) {
         case IMAGE_FORMAT_NV12:
         case IMAGE_FORMAT_NV21:
             nativeImage.ppPlane[1] = nativeImage.ppPlane[0] + width * height;
@@ -67,8 +67,7 @@ void MyGLRenderContext::SetImageDataWithIndex(int index, int format, int width, 
             break;
     }
 
-    if (m_pCurSample)
-    {
+    if (m_pCurSample) {
         m_pCurSample->LoadMultiImageWithIndex(index, &nativeImage);
     }
 
@@ -120,6 +119,11 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
             case SAMPLE_TYPE_KEY_BLENDING:
                 // 片元颜色混合
                 m_pCurSample = new BlendingSample();
+                break;
+            case SAMPLE_TYPE_KEY_INSTANCING:
+                // m_pCurSample = new Instancing3DSample();
+                m_pCurSample = new InstancingSample();
+                break;
 
         }
     }

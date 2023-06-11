@@ -23,6 +23,7 @@
 #include <BasicLightingSample.h>
 #include <DepthTestingSample.h>
 #include <BlendingSample.h>
+#include <InstancingSample.h>
 
 class MyGLRenderContext {
 public:
