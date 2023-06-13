@@ -303,6 +303,7 @@ void Instancing3DSample::Draw(int screenW, int screenH) {
     UpdateMatrix(m_MVPMatrix, m_ModelMatrix, m_AngleX + 10, m_AngleY + 10,
                  m_ScaleX > m_ScaleY ? m_ScaleY : m_ScaleX, glm::vec3(0.0f, 0.0f, 0.0f), ratio);
 
+    // 把转换矩阵 传给GPU。
     glUniformMatrix4fv(m_MVPMatLoc, 1, GL_FALSE, &m_MVPMatrix[0][0]);
     // 参数含义：插槽位置，几个矩阵（单插槽可以多矩阵），CPU传到GPU时是否需要转置，矩阵地址(从定义看是第一个数据的位置)
     glUniformMatrix4fv(m_ModelMatrixLoc, 1, GL_FALSE, &m_ModelMatrix[0][0]);
@@ -338,14 +339,14 @@ Instancing3DSample::UpdateMatrix(glm::mat4 &mvpMatrix, glm::mat4 &modelMatrix, i
     auto radiansX = static_cast<float>(MATH_PI / 180.f * angleXRotate);
     auto radiansY = static_cast<float>(MATH_PI / 180.f * angleYRotate);
 
-    // Projection matrix
+    // Projection matrix ： 在远平面和近平面之间，摄像机看的就保留，反之，就裁剪掉。
     glm::mat4 Projection = glm::perspective(45.0f, ratio, 0.1f, 100.0f);
-    // View matrix
+    // View matrix ： 针对摄像机
     glm::mat4 View       = glm::lookAt(
             glm::vec3(0, 0, 3),
-            glm::vec3(0, 0, 0),
-            glm::vec3(0, 1, 0));
-    // Model matrix
+            glm::vec3(0, 0, 0), // target 就是 centre(0,0,0)
+            glm::vec3(0, 1, 0));  // up 也是向上的。
+    // Model matrix : 旋转，位移
     glm::mat4 Model      = glm::mat4(1.0f);
     Model = glm::scale(Model, glm::vec3(scale, scale, scale));
     Model = glm::rotate(Model, radiansX, glm::vec3(1.0f, 0.0f, 0.0f));
