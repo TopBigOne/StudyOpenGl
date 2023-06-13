@@ -125,6 +125,10 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 // m_pCurSample = new InstancingSample();
                 break;
 
+            case SAMPLE_TYPE_KEY_PARTICLES:
+                m_pCurSample = new ParticlesSample();
+                break;
+
         }
     }
 
