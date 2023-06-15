@@ -16,6 +16,7 @@ import com.ya.opengl.studyopengl30.activity.DepthTestingActivity;
 import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
 import com.ya.opengl.studyopengl30.activity.FBOActivity;
 import com.ya.opengl.studyopengl30.activity.InstancingActivity;
+import com.ya.opengl.studyopengl30.activity.MRTActivity;
 import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
 import com.ya.opengl.studyopengl30.activity.PBOActivity;
 import com.ya.opengl.studyopengl30.activity.ParticlesActivity;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnInstancingRender;
     Button btnParticlesRender;
     Button btnPBORender;
+    Button btnMRTRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnInstancingRender = findViewById(R.id.btn_instancing_render);
         btnParticlesRender = findViewById(R.id.btn_particles_render);
         btnPBORender = findViewById(R.id.btn_pbo_render);
+        btnMRTRender = findViewById(R.id.btn_mrt_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -102,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnInstancingRender);
         buttonList.add(btnParticlesRender);
         buttonList.add(btnPBORender);
+        buttonList.add(btnMRTRender);
 
     }
 
@@ -165,9 +169,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_particles_render:
                 // 粒子
                 toAnotherActivity(ParticlesActivity.class);
-                break; case R.id.btn_pbo_render:
+                break;
+            case R.id.btn_pbo_render:
                 // pbo:
                 toAnotherActivity(PBOActivity.class);
+                break;
+            case R.id.btn_mrt_render:
+                // pbo:
+                toAnotherActivity(MRTActivity.class);
                 break;
 
 

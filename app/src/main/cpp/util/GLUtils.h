@@ -36,6 +36,10 @@ public:
         glUniformMatrix4fv(glGetUniformLocation(programId, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
 
+    static void setInt(GLuint programId, const std::string &name, int value) {
+        glUniform1i(glGetUniformLocation(programId, name.c_str()), value);
+    }
+
 
 
 };

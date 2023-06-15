@@ -27,6 +27,7 @@
 #include <Instancing3DSample.h>
 #include <ParticlesSample.h>
 #include <PBOSample.h>
+#include <MRTSample.h>
 
 class MyGLRenderContext {
 public:
