@@ -219,7 +219,7 @@
                 android:id="@+id/btn_pbo_render"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="22_PBO"
+                android:text="22_PBO ：像素缓存区对象"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -240,6 +240,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.594" />
+
+             <Button
+                android:id="@+id/btn_fbo_blit_render"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="23_FBO_BLIT-  帧缓冲区位块传送"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.594" />
+
+
+
 
         </LinearLayout>
 
