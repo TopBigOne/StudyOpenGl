@@ -17,6 +17,7 @@ import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
 import com.ya.opengl.studyopengl30.activity.FBOActivity;
 import com.ya.opengl.studyopengl30.activity.InstancingActivity;
 import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
+import com.ya.opengl.studyopengl30.activity.PBOActivity;
 import com.ya.opengl.studyopengl30.activity.ParticlesActivity;
 import com.ya.opengl.studyopengl30.activity.StencilTestingActivity;
 import com.ya.opengl.studyopengl30.activity.TextureMappingActivity;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnBlendingRender;
     Button btnInstancingRender;
     Button btnParticlesRender;
+    Button btnPBORender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnBlendingRender = findViewById(R.id.btn_blending_test_render);
         btnInstancingRender = findViewById(R.id.btn_instancing_render);
         btnParticlesRender = findViewById(R.id.btn_particles_render);
+        btnPBORender = findViewById(R.id.btn_pbo_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnBlendingRender);
         buttonList.add(btnInstancingRender);
         buttonList.add(btnParticlesRender);
+        buttonList.add(btnPBORender);
 
     }
 
@@ -161,6 +165,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_particles_render:
                 // 粒子
                 toAnotherActivity(ParticlesActivity.class);
+                break; case R.id.btn_pbo_render:
+                // pbo:
+                toAnotherActivity(PBOActivity.class);
                 break;
 
 

@@ -5,16 +5,22 @@
 # Sets the minimum version of CMake required to build the native library.
 
 cmake_minimum_required(VERSION 3.18.1)
+#cmake_minimum_required(VERSION 3.4.1)
+
+set(jnilibs "${CMAKE_SOURCE_DIR}/../jniLibs")
 
 # Declares and names the project.
 
 project("studyopengl30")
+
+
 
 include_directories(
         glm
         render
         sample
         util
+        opencv_3_0_0
         egl
 )
 
@@ -39,10 +45,17 @@ find_library(
         log)
 
 
+add_library(opencv_java3 SHARED IMPORTED )
+set_target_properties(opencv_java3 PROPERTIES IMPORTED_LOCATION ${jnilibs}/${CMAKE_ANDROID_ARCH_ABI}/libopencv_java3.so)
+
+set(third-party-libs opencv_java3)
+
 target_link_libraries(
         studyopengl30
+
+        ${third-party-libs}
+        ${log-lib}
         EGL
         GLESv3
-        ${log-lib}
         android
 )

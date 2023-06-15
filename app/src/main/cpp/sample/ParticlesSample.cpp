@@ -49,7 +49,7 @@ void ParticlesSample::LoadImage(NativeImage *pImage) {
 }
 
 void ParticlesSample::Init() {
-    if (m_ProgramObj){
+    if (m_ProgramObj) {
         return;
     }
 
@@ -265,6 +265,10 @@ void ParticlesSample::Draw(int screenW, int screenH) {
     glUniform1i(m_SamplerLoc, 0);
 
     glDrawArraysInstanced(GL_TRIANGLES, 0, 36, particleCount);
+
+    int a[] = {3, 1, 5, 7, 3, 7, 9};
+
+
 
 
 }

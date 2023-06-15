@@ -121,6 +121,10 @@ void InstancingSample::Init() {
     // bind vertex -----end
 
 
+
+
+
+
 }
 
 void InstancingSample::Draw(int screenW, int screenH) {
