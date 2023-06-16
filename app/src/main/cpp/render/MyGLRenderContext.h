@@ -28,6 +28,7 @@
 #include <ParticlesSample.h>
 #include <PBOSample.h>
 #include <MRTSample.h>
+#include <SkyBoxSample.h>
 
 class MyGLRenderContext {
 public:

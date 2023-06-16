@@ -21,6 +21,7 @@ import com.ya.opengl.studyopengl30.activity.MRTActivity;
 import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
 import com.ya.opengl.studyopengl30.activity.PBOActivity;
 import com.ya.opengl.studyopengl30.activity.ParticlesActivity;
+import com.ya.opengl.studyopengl30.activity.SkyBoxActivity;
 import com.ya.opengl.studyopengl30.activity.StencilTestingActivity;
 import com.ya.opengl.studyopengl30.activity.TextureMappingActivity;
 import com.ya.opengl.studyopengl30.activity.TransformFeedbackActivity;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnPBORender;
     Button btnMRTRender;
     Button btnFBOBlitRender;
+    Button btnSkyBoxRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPBORender = findViewById(R.id.btn_pbo_render);
         btnMRTRender = findViewById(R.id.btn_mrt_render);
         btnFBOBlitRender = findViewById(R.id.btn_fbo_blit_render);
+        btnSkyBoxRender = findViewById(R.id.btn_sky_box_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -110,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnPBORender);
         buttonList.add(btnMRTRender);
         buttonList.add(btnFBOBlitRender);
+        buttonList.add(btnSkyBoxRender);
 
     }
 
@@ -185,6 +189,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_fbo_blit_render:
                 // pbo:
                 toAnotherActivity(FboBlitActivity.class);
+                break;
+            case R.id.btn_sky_box_render:
+                // texture_cube_map:
+                toAnotherActivity(SkyBoxActivity.class);
                 break;
 
 

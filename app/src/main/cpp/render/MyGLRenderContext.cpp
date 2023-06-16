@@ -136,6 +136,10 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 m_pCurSample = new MRTSample();
                 break;
 
+            case SAMPLE_TYPE_KEY_SKYBOX:
+                m_pCurSample = new SkyBoxSample();
+                break;
+
 
         }
     }
