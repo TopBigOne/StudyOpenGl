@@ -31,6 +31,7 @@
 #include <SkyBoxSample.h>
 #include <StencilTestingSample.h>
 #include "StencilTestingSample.h"
+#include "AvatarSample.h"
 
 
 #include <ShockWaveSample.h>

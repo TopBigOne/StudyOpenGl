@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ya.opengl.studyopengl30.activity.AVO_VBO_Activity;
+import com.ya.opengl.studyopengl30.activity.AvatarActivity;
 import com.ya.opengl.studyopengl30.activity.BasicLightingActivity;
 import com.ya.opengl.studyopengl30.activity.BlendingActivity;
 import com.ya.opengl.studyopengl30.activity.CoordSystemActivity;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnFBOBlitRender;
     Button btnSkyBoxRender;
     Button btnShockWaveRender;
+    Button btnAvatarRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnFBOBlitRender = findViewById(R.id.btn_fbo_blit_render);
         btnSkyBoxRender = findViewById(R.id.btn_sky_box_render);
         btnShockWaveRender = findViewById(R.id.btn_shock_wave_render);
+        btnAvatarRender = findViewById(R.id.btn_avatar_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -118,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnFBOBlitRender);
         buttonList.add(btnSkyBoxRender);
         buttonList.add(btnShockWaveRender);
+        buttonList.add(btnAvatarRender);
 
     }
 
@@ -200,8 +204,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_shock_wave_render:
-                // texture_cube_map:
+                // 水波纹:
                 toAnotherActivity(ShockWaveActivity.class);
+                break;
+            case R.id.btn_avatar_render:
+                // 水波纹:
+                toAnotherActivity(AvatarActivity.class);
                 break;
 
 

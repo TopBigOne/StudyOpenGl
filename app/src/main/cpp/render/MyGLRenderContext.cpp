@@ -142,6 +142,11 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 // 水波纹
                 m_pCurSample = new ShockWaveSample();
                 break;
+            case SAMPLE_TYPE_KEY_AVATAR:
+                //
+                m_pCurSample = new AvatarSample();
+                break;
+
             default:
                 break;
 

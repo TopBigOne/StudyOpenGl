@@ -110,4 +110,13 @@ public class NativeRender {
         native_SetParamsFloat(SAMPLE_TYPE_SET_TOUCH_LOC, touchX, touchY);
 
     }
+
+    /**
+     * 重力感应：阿发达
+     * @param x
+     * @param y
+     */
+    public void setGravityXY(float x, float y) {
+        native_SetParamsFloat(SAMPLE_TYPE_SET_GRAVITY_XY, x, y);
+    }
 }
