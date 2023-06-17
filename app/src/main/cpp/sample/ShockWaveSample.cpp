@@ -179,16 +179,14 @@ void ShockWaveSample::Draw(int screenW, int screenH) {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_TextureId);
     GLUtils::setFloat(m_ProgramObj, "s_TextureMap", 0);
-    // 注意： 核心的算法，，来了。
-    int  temp_mod = fmod(m_FrameIndex, 150) / 120;
-    auto time     = static_cast<float>(temp_mod);
+    // 注意： 核心的算法，，来了,,,,要留意fomd 精度啊。
+    double  temp_mod = fmod(m_FrameIndex, 150) / 120;
     // 时间
-    GLUtils::setFloat(m_ProgramObj, "u_time", time);
+    auto time0 = static_cast<float>(temp_mod);
+    auto time = static_cast<float>(fmod(m_FrameIndex, 150) / 120);
+
+    GLUtils::setFloat(m_ProgramObj, "u_Time", time0);
     // 点击位置
-
-    glm::vec2 touch = glm::vec2(m_X, m_Y);
-    LOGCATI("ShockWaveSample:: invoke_draw x: %f , y: %f  ", m_X, m_Y);
-
     GLUtils::setVec2(m_ProgramObj, "u_TouchXY", m_Touch);
     // 纹理大小，其实，就是图片大小
     GLUtils::setVec2(m_ProgramObj, "u_TexSize",
@@ -196,7 +194,6 @@ void ShockWaveSample::Draw(int screenW, int screenH) {
     // todo 边界？
     GLUtils::setFloat(m_ProgramObj, "u_Boundary", 0.1f);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, nullptr);
-
 
 }
 
