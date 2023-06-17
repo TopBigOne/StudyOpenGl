@@ -7,6 +7,7 @@
 #include "GLUtils.h"
 #include "ShockWaveSample.h"
 
+glm::highp_vec2 m_Touch;
 
 ShockWaveSample::ShockWaveSample() {
 
@@ -24,7 +25,7 @@ ShockWaveSample::ShockWaveSample() {
     m_FrameIndex = 0;
     m_X          = 0.5;
     m_Y          = 0.5;
-    // m_TouchXY = glm::vec2(0.5f, 0.5f);
+    m_Touch = glm::vec2(0.5f, 0.5f);
 
 }
 
@@ -188,7 +189,7 @@ void ShockWaveSample::Draw(int screenW, int screenH) {
     glm::vec2 touch = glm::vec2(m_X, m_Y);
     LOGCATI("ShockWaveSample:: invoke_draw x: %f , y: %f  ", m_X, m_Y);
 
-    GLUtils::setVec2(m_ProgramObj, "u_TouchXY", touch);
+    GLUtils::setVec2(m_ProgramObj, "u_TouchXY", m_Touch);
     // 纹理大小，其实，就是图片大小
     GLUtils::setVec2(m_ProgramObj, "u_TexSize",
                      glm::vec2(m_RenderImage.width, m_RenderImage.height));
@@ -254,6 +255,6 @@ void ShockWaveSample::SetTouchLocation(float x, float y) {
     m_Y = y / m_SurfaceHeight;
     LOGCATI("ShockWaveSample:: SetTouchLocation %f", m_X);
     LOGCATI("ShockWaveSample:: SetTouchLocation %f", m_Y);
-    // m_TouchXY    = glm::vec2(x / m_SurfaceWidth, y / m_SurfaceHeight);
+     m_Touch = glm::vec2(x / m_SurfaceWidth, y / m_SurfaceHeight);
     m_FrameIndex = 0;
 }
