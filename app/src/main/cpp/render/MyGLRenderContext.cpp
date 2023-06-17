@@ -4,7 +4,6 @@
 
 #include "MyGLRenderContext.h"
 #include "LogUtils.h"
-#include "StencilTestingSample.h"
 
 
 MyGLRenderContext *MyGLRenderContext::m_pContext = nullptr;
@@ -139,6 +138,12 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
             case SAMPLE_TYPE_KEY_SKYBOX:
                 m_pCurSample = new SkyBoxSample();
                 break;
+            case SAMPLE_TYPE_KEY_SHOCK_WAVE:
+                // 水波纹
+                m_pCurSample = new ShockWaveSample();
+                break;
+            default:
+                break;
 
 
         }
@@ -148,7 +153,19 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
 }
 
 void MyGLRenderContext::SetParamsFloat(int paramType, float value0, float value1) {
+    if (m_pCurSample) {
+        switch (paramType) {
+            case SAMPLE_TYPE_KEY_SET_TOUCH_LOC:
+                m_pCurSample->SetTouchLocation(value0, value1);
+                break;
+            case SAMPLE_TYPE_SET_GRAVITY_XY:
+                m_pCurSample->SetGravityXY(value0, value1);
+                break;
+            default:
+                break;
 
+        }
+    }
 }
 
 void MyGLRenderContext::SetParamsShortArr(short *const pShortArr, int arrSize) {

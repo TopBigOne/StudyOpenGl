@@ -29,8 +29,13 @@
 #include <PBOSample.h>
 #include <MRTSample.h>
 #include <SkyBoxSample.h>
+#include <StencilTestingSample.h>
+#include "StencilTestingSample.h"
 
-class MyGLRenderContext {
+
+#include <ShockWaveSample.h>
+
+class MyGLRenderContext { // implicit instantiation of undefined template
 public:
     MyGLRenderContext();
 

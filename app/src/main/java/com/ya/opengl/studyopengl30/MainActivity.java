@@ -21,6 +21,7 @@ import com.ya.opengl.studyopengl30.activity.MRTActivity;
 import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
 import com.ya.opengl.studyopengl30.activity.PBOActivity;
 import com.ya.opengl.studyopengl30.activity.ParticlesActivity;
+import com.ya.opengl.studyopengl30.activity.ShockWaveActivity;
 import com.ya.opengl.studyopengl30.activity.SkyBoxActivity;
 import com.ya.opengl.studyopengl30.activity.StencilTestingActivity;
 import com.ya.opengl.studyopengl30.activity.TextureMappingActivity;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnMRTRender;
     Button btnFBOBlitRender;
     Button btnSkyBoxRender;
+    Button btnShockWaveRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMRTRender = findViewById(R.id.btn_mrt_render);
         btnFBOBlitRender = findViewById(R.id.btn_fbo_blit_render);
         btnSkyBoxRender = findViewById(R.id.btn_sky_box_render);
+        btnShockWaveRender = findViewById(R.id.btn_shock_wave_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -114,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnMRTRender);
         buttonList.add(btnFBOBlitRender);
         buttonList.add(btnSkyBoxRender);
+        buttonList.add(btnShockWaveRender);
 
     }
 
@@ -193,6 +197,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_sky_box_render:
                 // texture_cube_map:
                 toAnotherActivity(SkyBoxActivity.class);
+                break;
+
+            case R.id.btn_shock_wave_render:
+                // texture_cube_map:
+                toAnotherActivity(ShockWaveActivity.class);
                 break;
 
 

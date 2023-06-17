@@ -89,6 +89,12 @@ public:
     virtual void UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY)
     {}
 
+    virtual void SetTouchLocation(float x, float y)
+    {}
+
+    virtual void SetGravityXY(float x, float y)
+    {}
+
     virtual void Init()=0;
     virtual void  Draw(int screenW,int screenH) =0;
     virtual void Destroy()=0;

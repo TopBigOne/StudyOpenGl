@@ -40,6 +40,14 @@ public:
         glUniform1i(glGetUniformLocation(programId, name.c_str()), value);
     }
 
+    static void setFloat(GLuint programId, const std::string &name, float value) {
+        glUniform1f(glGetUniformLocation(programId, name.c_str()), value);
+    }
+
+    static void setVec2(GLuint programId, const std::string &name, const glm::vec2 &value) {
+        glUniform2fv(glGetUniformLocation(programId, name.c_str()), 1, &value[0]);
+    }
+
 
 
 };
