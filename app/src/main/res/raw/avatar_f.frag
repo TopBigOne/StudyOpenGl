@@ -3,6 +3,7 @@
  precision highp float;
 in vec2 v_texCoord;
 layout (location = 0) out vec4 outColor;
+// 2D 纹理采样器
 uniform sampler2D s_TextureMap;
 uniform vec2 u_texSize;
 uniform float u_needRotate;

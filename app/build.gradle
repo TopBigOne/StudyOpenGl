@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    ndkVersion "20.0.5594570"
     namespace 'com.ya.opengl.studyopengl30'
     compileSdk 32
 
@@ -51,7 +52,7 @@ android {
     externalNativeBuild {
         cmake {
             path file('src/main/cpp/CMakeLists.txt')
-           //  version '3.18.1'
+            //  version '3.18.1'
         }
     }
 

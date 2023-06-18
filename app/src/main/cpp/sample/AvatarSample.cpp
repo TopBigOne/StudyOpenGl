@@ -55,11 +55,14 @@ void AvatarSample::Init() {
         return;
     }
     glGenTextures(RENDER_IMG_NUM, m_TextureIds);
+
     for (int i = 0; i < RENDER_IMG_NUM; ++i) {
         glActiveTexture(GL_TEXTURE0 + i);
         glBindTexture(GL_TEXTURE_2D, m_TextureIds[i]);
+        // 设置2D 纹理数据
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_RenderImages[i].width, m_RenderImages[i].height,
                      0, GL_RGBA, GL_UNSIGNED_BYTE, m_RenderImages[i].ppPlane[0]);
+
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -226,6 +229,7 @@ void AvatarSample::Draw(int screenW, int screenH) {
     }
     float dScaleLevel = m_FrameIndex % 200 * 1.0f / 1000 + 0.0001f;
     float scaleLevel  = 1.0;
+    auto  ratio       = static_cast<float >(screenW / screenH);
 
     glClearColor(1.0f,
                  1.0f,
@@ -251,46 +255,44 @@ void AvatarSample::Draw(int screenW, int screenH) {
     GLUtils::setFloat(m_ProgramObj, "u_needRotate", 1.0f);
     GLUtils::setFloat(m_ProgramObj, "u_rotateAngle", m_TransX * 1.5f);
     UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, m_TransX / 2, m_TransY / 2,
-                    (float) screenW / screenH);
+                    ratio);
     glUniformMatrix4fv(m_MVPMatLoc, 1, GL_FALSE, &m_MVPMatrix[0][0]);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, nullptr);
 
-/*
- *
-
-
-    //2. 人像层的绘制
+    // 2: 绘制阿凡达人像
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, m_TextureIds[1]);
+    // 将纹理对象（数据）从CPU中传入显存中的着色器
+    // 之所以使用glUniform1i（）函数，是因为只需要给纹理采样器传入一个索引值(位置)即可，
+    // 这样我们就能够在一个片元着色器中设置多个纹理。
     glUniform1i(m_SamplerLoc, 1);
     scaleLevel = static_cast<float>(1.0f + dScaleLevel * pow(-1, m_FrameIndex / 200 + 1));
     scaleLevel = scaleLevel < 1.0 ? scaleLevel + 0.2f : scaleLevel;
     m_ScaleY   = m_ScaleX = scaleLevel + 0.4f;
-    LOGCATE("AvatarSample::Draw() scaleLevel=%f", scaleLevel);
-    UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, m_TransX * 1.2f, m_TransY * 1.2f,
-                    (float) screenW / screenH);
+    UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, m_TransX * 1.2f, m_TransY * 1.2f, ratio);
     GLUtils::setVec2(m_ProgramObj, "u_texSize",
                      glm::vec2(m_RenderImages[0].width, m_RenderImages[0].height));
     GLUtils::setFloat(m_ProgramObj, "u_needRotate", 0.0f);// u_needRotate == 0 关闭形变
     GLUtils::setFloat(m_ProgramObj, "u_rotateAngle", m_TransX / 20);
     glUniformMatrix4fv(m_MVPMatLoc, 1, GL_FALSE, &m_MVPMatrix[0][0]);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (const void *) 0);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, nullptr);
 
-    //3. 外层的绘制
+    // 3: 外层的白色星星
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_ALPHA);
     glUseProgram(m_BlurProgramObj);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_TextureIds[2]);
+
     GLUtils::setFloat(m_BlurProgramObj, "s_TextureMap", 0);
-    scaleLevel = static_cast<float>(1.0f + dScaleLevel * pow(-1, m_FrameIndex / 200));
+    // -1 的 (m_FrameIndex/200) 次方。
+    scaleLevel = static_cast<float >(dScaleLevel * pow(-1, m_FrameIndex / 200) + 1.0f);
     scaleLevel = scaleLevel < 1.0 ? scaleLevel + 0.2f : scaleLevel;
-    m_ScaleY   = m_ScaleX = scaleLevel + 0.8f;
-    UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, m_TransX * 2.5f, m_TransY * 2.5f,
-                    (float) screenW / screenH);
+    m_ScaleY = m_ScaleX = scaleLevel +0.8f;
+    UpdateMVPMatrix(m_MVPMatrix,m_AngleX,m_AngleY,m_TransX*2.5f,m_TransY*2.5,ratio);
     GLUtils::setMat4(m_BlurProgramObj, "u_MVPMatrix", m_MVPMatrix);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (const void *) 0);
-*/
+
 
     glDisable(GL_BLEND);
     m_FrameIndex++;
