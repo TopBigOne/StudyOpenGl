@@ -32,6 +32,7 @@
 #include <StencilTestingSample.h>
 #include "StencilTestingSample.h"
 #include "AvatarSample.h"
+#include "ScratchCardSample.h"
 
 
 #include <ShockWaveSample.h>

@@ -44,14 +44,14 @@ public:
     }
 
 private:
-    pthread_mutex_t m_mutex;
+    pthread_mutex_t     m_mutex;
     pthread_mutexattr_t m_attr;
 };
 
-class ScopeSyncLock {
+class ScopedSyncLock {
 public:
     // 直接给 m_pLock 赋值了。
-    ScopeSyncLock(MySyncLock *pLock) : m_pLock(pLock) {
+    ScopedSyncLock(MySyncLock *pLock) : m_pLock(pLock) {
         if (pLock != NULL) {
             m_pLock->Lock();
         }

@@ -147,6 +147,10 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 m_pCurSample = new AvatarSample();
                 break;
 
+            case SAMPLE_TYPE_KEY_SCRATCH_CARD:
+                m_pCurSample = new ScratchCardSample();
+                break;
+
             default:
                 break;
 

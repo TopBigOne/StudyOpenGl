@@ -22,6 +22,7 @@ import com.ya.opengl.studyopengl30.activity.MRTActivity;
 import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
 import com.ya.opengl.studyopengl30.activity.PBOActivity;
 import com.ya.opengl.studyopengl30.activity.ParticlesActivity;
+import com.ya.opengl.studyopengl30.activity.ScratchCardActivity;
 import com.ya.opengl.studyopengl30.activity.ShockWaveActivity;
 import com.ya.opengl.studyopengl30.activity.SkyBoxActivity;
 import com.ya.opengl.studyopengl30.activity.StencilTestingActivity;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnSkyBoxRender;
     Button btnShockWaveRender;
     Button btnAvatarRender;
+    Button btnScratchCardRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSkyBoxRender = findViewById(R.id.btn_sky_box_render);
         btnShockWaveRender = findViewById(R.id.btn_shock_wave_render);
         btnAvatarRender = findViewById(R.id.btn_avatar_render);
+        btnScratchCardRender = findViewById(R.id.btn_scratch_card_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -122,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnSkyBoxRender);
         buttonList.add(btnShockWaveRender);
         buttonList.add(btnAvatarRender);
+        buttonList.add(btnScratchCardRender);
 
     }
 
@@ -210,6 +214,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_avatar_render:
                 // 水波纹:
                 toAnotherActivity(AvatarActivity.class);
+                break;
+            case R.id.btn_scratch_card_render:
+                // 水波纹:
+                toAnotherActivity(ScratchCardActivity.class);
                 break;
 
 
