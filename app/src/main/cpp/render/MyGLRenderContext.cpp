@@ -9,7 +9,7 @@
 MyGLRenderContext *MyGLRenderContext::m_pContext = nullptr;
 
 MyGLRenderContext::MyGLRenderContext() {
-    m_pCurSample    = new TriangleSample;
+    m_pCurSample = new TriangleSample;
     m_pBeforeSample = nullptr;
 
 }
@@ -18,7 +18,7 @@ MyGLRenderContext::MyGLRenderContext() {
 void MyGLRenderContext::SetImageData(int format, int width, int height, uint8_t *pData) {
     NativeImage nativeImage;
     nativeImage.format = format;
-    nativeImage.width  = width;
+    nativeImage.width = width;
     nativeImage.height = height;
     nativeImage.ppPlane[0] = pData;
     switch (format) {
@@ -49,7 +49,7 @@ void MyGLRenderContext::SetImageDataWithIndex(int index, int format, int width, 
             index, format, width, height, pData);
     NativeImage nativeImage;
     nativeImage.format = format;
-    nativeImage.width  = width;
+    nativeImage.width = width;
     nativeImage.height = height;
     nativeImage.ppPlane[0] = pData;
 
@@ -181,9 +181,9 @@ void MyGLRenderContext::SetParamsFloat(int paramType, float value0, float value1
 }
 
 void MyGLRenderContext::SetParamsShortArr(short *const pShortArr, int arrSize) {
-    LOGCATI("MyGLRenderContext::SetParamsShortArr pShortArr=%p, arrSize=%d, pShortArr[0]=%d", pShortArr, arrSize, pShortArr[0]);
-    if(m_pCurSample)
-    {
+    LOGCATI("MyGLRenderContext::SetParamsShortArr pShortArr=%p, arrSize=%d, pShortArr[0]=%d",
+            pShortArr, arrSize, pShortArr[0]);
+    if (m_pCurSample) {
         m_pCurSample->LoadShortArrData(pShortArr, arrSize);
     }
 
@@ -226,7 +226,7 @@ void MyGLRenderContext::OnDrawFrame() {
 }
 
 MyGLRenderContext *MyGLRenderContext::GetInstance() {
-    LOGCATE("MyGLRenderContext::GetInstance");
+    LOGCATD("MyGLRenderContext::GetInstance");
     if (m_pContext == nullptr) {
         m_pContext = new MyGLRenderContext();
     }

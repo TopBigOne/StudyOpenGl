@@ -31,7 +31,9 @@ public class VisualizeAudioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_visualize_audio);
 
         myGLSurfaceView = findViewById(R.id.mgl_visualize_audio_render);
+        myGLSurfaceView.setRenderMode(RENDERMODE_CONTINUOUSLY);
         glRender = new GLRender();
+        myGLSurfaceView.setNativeRender(glRender.getNativeRender());
         glRender.init();
 
         glRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE_KEY_VISUALIZE_AUDIO, 0);
@@ -40,7 +42,7 @@ public class VisualizeAudioActivity extends AppCompatActivity {
         mAudioCollector.addCallback(audioCollectorCallback);
         mAudioCollector.init();
 
-        myGLSurfaceView.setRenderMode(RENDERMODE_CONTINUOUSLY);
+
     }
 
     @Override

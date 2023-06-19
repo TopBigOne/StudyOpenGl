@@ -216,8 +216,10 @@ public class MyGLSurfaceView extends GLSurfaceView {
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
             if (mNativeRender == null) {
+                Log.e(TAG, "onSurfaceChanged: mNativeRender == null");
                 return;
             }
+            Log.d(TAG, "onSurfaceCreated: ");
             mNativeRender.native_OnSurfaceCreated();
 
         }
@@ -225,16 +227,20 @@ public class MyGLSurfaceView extends GLSurfaceView {
         @Override
         public void onSurfaceChanged(GL10 gl, int width, int height) {
             if (mNativeRender == null) {
+                Log.e(TAG, "onSurfaceChanged: mNativeRender == null");
                 return;
             }
+            Log.d(TAG, "onSurfaceChanged: ");
             mNativeRender.native_OnSurfaceChanged(width, height);
         }
 
         @Override
         public void onDrawFrame(GL10 gl) {
             if (mNativeRender == null) {
+                Log.e(TAG, "onSurfaceChanged: mNativeRender == null");
                 return;
             }
+            Log.d(TAG, "onDrawFrame: ");
             mNativeRender.native_OnDrawFrame();
         }
     };

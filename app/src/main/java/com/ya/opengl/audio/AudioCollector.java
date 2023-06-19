@@ -20,11 +20,11 @@ import androidx.core.app.ActivityCompat;
  * @Desc : 音频收集
  */
 public class AudioCollector implements AudioRecord.OnRecordPositionUpdateListener {
-    private static final String TAG                   = "AudioCollector： ";
-    private static final int    RECORDER_SAMPLE_RATE  = 44100;
-    private static final int    RECORDER_CHANNELS     = 1;
-    private static final int    RECORDER_ENCODING_BIT = 16;
-    private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+    private static final String TAG                     = "AudioCollector： ";
+    private static final int    RECORDER_SAMPLE_RATE    = 44100;
+    private static final int    RECORDER_CHANNELS       = 1;
+    private static final int    RECORDER_ENCODING_BIT   = 16;
+    private static final int    RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
     private AudioRecord mAudioRecord;
     private short[]     mAudioBuffer;
@@ -36,9 +36,13 @@ public class AudioCollector implements AudioRecord.OnRecordPositionUpdateListene
 
 
     public AudioCollector(Context context) {
+        Log.d(TAG, "AudioCollector: ");
         mContext = context;
         mBufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLE_RATE, RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING);
-        mBufferSize = mBufferSize >> 1;
+        Log.i(TAG, "    : mBufferSize : " + mBufferSize);
+        mBufferSize = mBufferSize << 1;
+        Log.i(TAG, "    : mBufferSize : " + mBufferSize);
+
     }
 
     public void init() {
@@ -49,21 +53,24 @@ public class AudioCollector implements AudioRecord.OnRecordPositionUpdateListene
 
         mAudioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, RECORDER_SAMPLE_RATE, RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING, mBufferSize);
         mAudioRecord.startRecording();
+        String threadName = "jar-Audio-Recorder-thread";
 
         // audioRecoder 将数据写到 mBufferSize 中.
-        Thread mThread = new Thread("jar-Audio-Recorder-thread") {
+        Thread mThread = new Thread(threadName) {
             @Override
             public void run() {
+                super.run();
                 mAudioBuffer = new short[mBufferSize];
                 Looper.prepare();
                 mHandler = new Handler(Looper.myLooper());
-                Log.d(TAG, "jar-Audio-Recorder : create Handler.");
+                Log.i(TAG, "    " + threadName + " : create Handler: ---start");
                 mAudioRecord.setRecordPositionUpdateListener(AudioCollector.this, mHandler);
                 int   bytePerSample = RECORDER_ENCODING_BIT / 8;
                 float sampleToDraw  = mBufferSize / bytePerSample;
                 mAudioRecord.setPositionNotificationPeriod((int) sampleToDraw);
                 // audioRecoder 将数据写到 mBufferSize 中.
                 mAudioRecord.read(mAudioBuffer, 0, mBufferSize);
+                Log.i(TAG, "    " + threadName + " : create Handler: ---end");
                 Looper.loop();
             }
         };
@@ -104,8 +111,8 @@ public class AudioCollector implements AudioRecord.OnRecordPositionUpdateListene
         if (mCallback == null) {
             return;
         }
-        if (mAudioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING && mAudioRecord.read(mAudioBuffer, 0, mAudioBuffer.length) != 1) {
-            Log.i(TAG, "    onPeriodicNotification: invoke onAudioBufferCallback ");
+        if (mAudioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING && mAudioRecord.read(mAudioBuffer, 0, mAudioBuffer.length) != -1) {
+            Log.i(TAG, "    : invoke onAudioBufferCallback ");
             mCallback.onAudioBufferCallback(mAudioBuffer);
         }
     }
