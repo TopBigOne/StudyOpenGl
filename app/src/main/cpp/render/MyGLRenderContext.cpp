@@ -150,6 +150,9 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
             case SAMPLE_TYPE_KEY_SCRATCH_CARD:
                 m_pCurSample = new ScratchCardSample();
                 break;
+            case SAMPLE_TYPE_KEY_VISUALIZE_AUDIO:
+                m_pCurSample = new VisualizeAudioSample();
+                break;
 
             default:
                 break;
@@ -178,6 +181,11 @@ void MyGLRenderContext::SetParamsFloat(int paramType, float value0, float value1
 }
 
 void MyGLRenderContext::SetParamsShortArr(short *const pShortArr, int arrSize) {
+    LOGCATI("MyGLRenderContext::SetParamsShortArr pShortArr=%p, arrSize=%d, pShortArr[0]=%d", pShortArr, arrSize, pShortArr[0]);
+    if(m_pCurSample)
+    {
+        m_pCurSample->LoadShortArrData(pShortArr, arrSize);
+    }
 
 }
 

@@ -47,6 +47,10 @@ public class GLRender {
         mNativeRender.native_SetImageDataWithIndex(index, format, width, height, bytes);
     }
 
+    public void setAudioData(short[] audioData) {
+        mNativeRender.native_SetAudioData(audioData);
+    }
+
     public NativeRender getNativeRender() {
         return mNativeRender;
     }

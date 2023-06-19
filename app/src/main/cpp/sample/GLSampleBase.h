@@ -62,17 +62,20 @@
 #define SAMPLE_TYPE_KEY_SET_TOUCH_LOC           SAMPLE_TYPE + 999
 #define SAMPLE_TYPE_SET_GRAVITY_XY              SAMPLE_TYPE + 1000
 
+#define ZERO_FLOAT 0.0f
+#define ONE_FLOAT 1.0f
+
 #define DEFAULT_OGL_ASSETS_DIR "/sdcard/Android/data/acom/ya/opengl/studyopengl30/files/Download"
 
 
 class GLSampleBase {
 public:
     GLSampleBase() {
-        m_ProgramObj = 0;
-        m_VertexShader = 0;
+        m_ProgramObj     = 0;
+        m_VertexShader   = 0;
         m_FragmentShader = 0;
 
-        m_SurfaceWidth = 0;
+        m_SurfaceWidth  = 0;
         m_SurfaceHeight = 0;
 
     }
@@ -85,19 +88,31 @@ public:
 
     virtual void LoadMultiImageWithIndex(int index, NativeImage *pImage) {};
 
-    virtual void LoadShortArrData(short *const pShortArr, int ArrSize) {};
-    virtual void UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY)
-    {}
+    /**
+     *加载short 数据
+     * @param pShortArr
+     * @param arrSize
+     */
+    virtual void LoadShortArrData(short *const pShortArr, int arrSize) {};
 
-    virtual void SetTouchLocation(float x, float y)
-    {}
+    /**
+     * 更新转换参数
+     * @param rotateX
+     * @param rotateY
+     * @param scaleX
+     * @param scaleY
+     */
+    virtual void UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY) {}
 
-    virtual void SetGravityXY(float x, float y)
-    {}
+    virtual void SetTouchLocation(float x, float y) {}
 
-    virtual void Init()=0;
-    virtual void  Draw(int screenW,int screenH) =0;
-    virtual void Destroy()=0;
+    virtual void SetGravityXY(float x, float y) {}
+
+    virtual void Init() = 0;
+
+    virtual void Draw(int screenW, int screenH) = 0;
+
+    virtual void Destroy() = 0;
 
 
 protected:
@@ -106,8 +121,8 @@ protected:
     GLuint m_ProgramObj;
 
     MySyncLock m_Lock;
-    int m_SurfaceWidth;
-    int m_SurfaceHeight;
+    int        m_SurfaceWidth;
+    int        m_SurfaceHeight;
 };
 
 #endif //STUDYOPENGL3_0_GLSAMPLEBASE_H

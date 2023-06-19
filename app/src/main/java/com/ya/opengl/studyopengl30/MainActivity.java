@@ -28,6 +28,7 @@ import com.ya.opengl.studyopengl30.activity.SkyBoxActivity;
 import com.ya.opengl.studyopengl30.activity.StencilTestingActivity;
 import com.ya.opengl.studyopengl30.activity.TextureMappingActivity;
 import com.ya.opengl.studyopengl30.activity.TransformFeedbackActivity;
+import com.ya.opengl.studyopengl30.activity.VisualizeAudioActivity;
 import com.ya.opengl.studyopengl30.activity.YUVRenderActivity;
 import com.ya.opengl.studyopengl30.egl.EGLActivity;
 import com.ya.opengl.studyopengl30.render.GLRender;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnShockWaveRender;
     Button btnAvatarRender;
     Button btnScratchCardRender;
+    Button btnVisualizeAudioRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnShockWaveRender = findViewById(R.id.btn_shock_wave_render);
         btnAvatarRender = findViewById(R.id.btn_avatar_render);
         btnScratchCardRender = findViewById(R.id.btn_scratch_card_render);
+        btnVisualizeAudioRender = findViewById(R.id.btn_visualize_audio_render);
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -126,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnShockWaveRender);
         buttonList.add(btnAvatarRender);
         buttonList.add(btnScratchCardRender);
+        buttonList.add(btnVisualizeAudioRender);
 
     }
 
@@ -218,6 +222,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_scratch_card_render:
                 // 水波纹:
                 toAnotherActivity(ScratchCardActivity.class);
+                break;
+            case R.id.btn_visualize_audio_render:
+                // audio 可视化
+                toAnotherActivity(VisualizeAudioActivity.class);
                 break;
 
 
