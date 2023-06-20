@@ -9,31 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
 
-import com.ya.opengl.studyopengl30.activity.AVO_VBO_Activity;
-import com.ya.opengl.studyopengl30.activity.AvatarActivity;
-import com.ya.opengl.studyopengl30.activity.BasicLightingActivity;
-import com.ya.opengl.studyopengl30.activity.BlendingActivity;
-import com.ya.opengl.studyopengl30.activity.CoordSystemActivity;
-import com.ya.opengl.studyopengl30.activity.DepthTestingActivity;
-import com.ya.opengl.studyopengl30.activity.DrawTriangleActivity;
-import com.ya.opengl.studyopengl30.activity.FBOActivity;
-import com.ya.opengl.studyopengl30.activity.FboBlitActivity;
-import com.ya.opengl.studyopengl30.activity.InstancingActivity;
-import com.ya.opengl.studyopengl30.activity.MRTActivity;
-import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
-import com.ya.opengl.studyopengl30.activity.PBOActivity;
-import com.ya.opengl.studyopengl30.activity.ParticlesActivity;
-import com.ya.opengl.studyopengl30.activity.RotaryHeadActivity;
-import com.ya.opengl.studyopengl30.activity.ScratchCardActivity;
-import com.ya.opengl.studyopengl30.activity.ShockWaveActivity;
-import com.ya.opengl.studyopengl30.activity.SkyBoxActivity;
-import com.ya.opengl.studyopengl30.activity.StencilTestingActivity;
-import com.ya.opengl.studyopengl30.activity.TextureMappingActivity;
-import com.ya.opengl.studyopengl30.activity.TransformFeedbackActivity;
-import com.ya.opengl.studyopengl30.activity.VisualizeAudioActivity;
-import com.ya.opengl.studyopengl30.activity.YUVRenderActivity;
+import com.ya.opengl.studyopengl30.activity.*;
 import com.ya.opengl.studyopengl30.egl.EGLActivity;
-import com.ya.opengl.studyopengl30.render.GLRender;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
         scrollView.post(new Runnable() {
             @Override
             public void run() {
@@ -258,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
         }
+
     }
 
     private void toAnotherActivity(Class<?> cls) {

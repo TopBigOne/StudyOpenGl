@@ -7,7 +7,6 @@
 #include "../util/GLUtils.h"
 #include "CommonDef.h"
 
-
 static float DotProduct(vec2 a, vec2 b) {
     return a.x * b.x + a.y * b.y;
 }
@@ -30,6 +29,7 @@ static float KEY_POINTS[KEY_POINTS_COUNT * 2] =
 
 
 RotaryHeadSample::RotaryHeadSample() {
+    LOGCATD("RotaryHeadSample::构造");
 
     m_SamplerLoc = GL_NONE;
     m_MVPMatLoc  = GL_NONE;
@@ -52,6 +52,8 @@ RotaryHeadSample::~RotaryHeadSample() {
 void RotaryHeadSample::Init() {
     if (m_ProgramObj)
         return;
+
+    LOGCATD("RotaryHeadSample::Init");
 
     char vShaderStr[] =
                  "#version 300 es\n"
@@ -126,7 +128,7 @@ void RotaryHeadSample::Init() {
 
 
 void RotaryHeadSample::LoadImage(NativeImage *pImage) {
-    LOGCATE("RotaryHeadSample::LoadImage pImage = %p", pImage->ppPlane[0]);
+    LOGCATD("RotaryHeadSample::LoadImage pImage = %p", pImage->ppPlane[0]);
     if (pImage) {
         ScopedSyncLock lock(&m_Lock);
         m_RenderImage.width  = pImage->width;
@@ -141,6 +143,9 @@ void RotaryHeadSample::Draw(int screenW, int screenH) {
     if (m_ProgramObj == GL_NONE) {
         return;
     }
+    LOGCATD("RotaryHeadSample::Draw");
+    LOGCATI("   [w,h]=[%d,%d]", screenW, screenH);
+
     if (m_TextureId == GL_NONE) {
         ScopedSyncLock lock(&m_Lock);
         if (m_RenderImage.ppPlane[0] != nullptr) {
@@ -202,7 +207,7 @@ void RotaryHeadSample::Destroy() {
  * @param ratio 宽高比
  * */
 void RotaryHeadSample::UpdateMVPMatrix(glm::mat4 &mvpMatrix, int angleX, int angleY, float ratio) {
-    LOGCATE("RotaryHeadSample::UpdateMVPMatrix angleX = %d, angleY = %d, ratio = %f", angleX,
+    LOGCATD("RotaryHeadSample::UpdateMVPMatrix angleX = %d, angleY = %d, ratio = %f", angleX,
             angleY, ratio);
     angleX = angleX % 360;
     angleY = angleY % 360;
@@ -237,6 +242,7 @@ void RotaryHeadSample::UpdateMVPMatrix(glm::mat4 &mvpMatrix, int angleX, int ang
 
 void
 RotaryHeadSample::UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY) {
+    LOGCATD("RotaryHeadSample::UpdateTransformMatrix");
     GLSampleBase::UpdateTransformMatrix(rotateX, rotateY, scaleX, scaleY);
     m_AngleX = static_cast<int>(rotateX);
     m_AngleY = static_cast<int>(rotateY);
@@ -245,7 +251,7 @@ RotaryHeadSample::UpdateTransformMatrix(float rotateX, float rotateY, float scal
 }
 
 void RotaryHeadSample::CalculateMesh(float rotaryAngle) {
-
+    LOGCATD("RotaryHeadSample::CalculateMesh");
     vec2 centerPoint(KEY_POINTS[16] / m_RenderImage.width, KEY_POINTS[17] / m_RenderImage.height);
     //centerPoint = RotaryKeyPoint(centerPoint, rotaryAngle);
     m_KeyPointsInts[8] = centerPoint;
@@ -256,7 +262,7 @@ void RotaryHeadSample::CalculateMesh(float rotaryAngle) {
         //inputPoint = RotaryKeyPoint(inputPoint, rotaryAngle);
         m_KeyPoints[i] = RotaryKeyPoint(inputPoint, rotaryAngle);;
         m_KeyPointsInts[i] = CalculateIntersection(inputPoint, centerPoint);
-        LOGCATE("RotaryHeadSample::CalculateMesh index=%d, input[x,y]=[%f, %f], interscet[x, y]=[%f, %f]",
+        LOGCATI("       index=%d, input[x,y]=[%f, %f], interscet[x, y]=[%f, %f]",
                 i,
                 m_KeyPoints[i].x, m_KeyPoints[i].y, m_KeyPointsInts[i].x, m_KeyPointsInts[i].y);
     }
@@ -325,62 +331,68 @@ void RotaryHeadSample::CalculateMesh(float rotaryAngle) {
 }
 
 vec2 RotaryHeadSample::CalculateIntersection(vec2 inputPoint, vec2 centerPoint) {
+    LOGCATD("RotaryHeadSample::CalculateIntersection");
     vec2 outputPoint;
-    // case 1:与y轴平行
-    if (inputPoint.x == centerPoint.x) {
-        vec2  pointA(inputPoint.x, 0);
-        vec2  pointB(inputPoint.x, 1);
+    if (inputPoint.x == centerPoint.x) //直线与 y 轴平行
+    {
+        vec2 pointA(inputPoint.x, 0);
+        vec2 pointB(inputPoint.x, 1);
+
         float dA = distance(inputPoint, pointA);
         float dB = distance(inputPoint, pointB);
         outputPoint = dA > dB ? pointB : pointA;
         return outputPoint;
-
     }
-    // case 2: 与x轴平行
-    if (inputPoint.y == centerPoint.y) {
-        vec2  pointA(0, inputPoint.y);
-        vec2  pointB(1, inputPoint.y);
+
+    if (inputPoint.y == centerPoint.y) //直线与 x 轴平行
+    {
+        vec2 pointA(0, inputPoint.y);
+        vec2 pointB(1, inputPoint.y);
+
         float dA = distance(inputPoint, pointA);
         float dB = distance(inputPoint, pointB);
         outputPoint = dA > dB ? pointB : pointA;
         return outputPoint;
-
     }
-    // y = a*x +c
-    float a = 0;
-    float c = 0;
-    a        = (inputPoint.y - centerPoint.y) / (inputPoint.x - centerPoint.x);
+
+    // y = a*x + c
+    float a = 0, c = 0;
+
+    a = (inputPoint.y - centerPoint.y) / (inputPoint.x - centerPoint.x);
+
     c        = inputPoint.y - a * inputPoint.x;
-    // x = 0 ,x = 1,y = 0,y = 1 ; 四条线 交点
 
-    // case 1: x = 0;
+    //x=0, x=1, y=0, y=1 四条线交点
+
+    //x=0
     vec2  point_0(0, c);
-    float d0 = DotProduct(centerPoint - inputPoint, centerPoint - point_0);
-    if (c >= 0 && c <= 1 && d0 > 0) {
+    float d0 = DotProduct((centerPoint - inputPoint), (centerPoint - point_0));
+
+    if (c >= 0 && c <= 1 && d0 > 0)
         outputPoint = point_0;
-    }
-    // case 2: x=1;
+
+    //x=1
     vec2  point_1(1, a + c);
-    float d1 = DotProduct((centerPoint - inputPoint), (centerPoint - point_1));
-    if ((a + c) >= 0 && (a + c) <= 1 && d1 > 0) {
+    float d1        = DotProduct((centerPoint - inputPoint), (centerPoint - point_1));
+
+    if ((a + c) >= 0 && (a + c) <= 1 && d1 > 0)
         outputPoint = point_1;
-    }
-    // case 3: y = 0;
+
+    //y=0
     vec2  point_2(-c / a, 0);
-    float d2 = DotProduct(centerPoint - inputPoint, centerPoint - point_2);
-    if ((-c / a) >= 0 && (-c / a) <= 1 && d2 > 0) {
+    float d2        = DotProduct((centerPoint - inputPoint), (centerPoint - point_2));
+
+    if ((-c / a) >= 0 && (-c / a) <= 1 && d2 > 0)
         outputPoint = point_2;
-    }
 
-    // case 4: y = 1;
+    //y=1
     vec2  point_3((1 - c) / a, 1);
-    float d3 = DotProduct((centerPoint - inputPoint), (centerPoint - point_3));
+    float d3        = DotProduct((centerPoint - inputPoint), (centerPoint - point_3));
 
-    if (((1 - c) / a) >= 0 && (1 - c) / a <= 1 && d3 > 0) {
+    if (((1 - c) / a) >= 0 && ((1 - c) / a) <= 1 && d3 > 0)
         outputPoint = point_3;
-    }
-    return outputPoint;
 
+    return outputPoint;
 }
 
 /**
@@ -390,7 +402,7 @@ vec2 RotaryHeadSample::CalculateIntersection(vec2 inputPoint, vec2 centerPoint) 
  * @return
  */
 vec2 RotaryHeadSample::RotaryKeyPoint(vec2 input, float rotaryAngle) {
-
+    LOGCATD("RotaryHeadSample::RotaryKeyPoint");
     // 二维向量相加的几何意义是将两个向量的起点放在同一个点上，然后将它们的终点相连，得到一个新的向量.
     return input + vec2(cos(rotaryAngle), sin(rotaryAngle)) * 0.02f;
 }

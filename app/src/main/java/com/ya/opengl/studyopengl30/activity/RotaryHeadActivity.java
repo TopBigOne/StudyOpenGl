@@ -39,15 +39,10 @@ public class RotaryHeadActivity extends AppCompatActivity {
                 byte[] byteArray = buf.array();
                 glRender.setImageData(IMAGE_FORMAT_RGBA, bitmap.getWidth(), bitmap.getHeight(), byteArray);
             }
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 is.close();
-            }
-            catch(IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -65,7 +60,7 @@ public class RotaryHeadActivity extends AppCompatActivity {
 
         glRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE_KEY_ROTARY_HEAD, 0);
         myGLSurfaceView.setNativeRender(glRender.getNativeRender());
-//        Bitmap b = loadRGBAImage(R.mipmap.img_2380);
+        //        Bitmap b = loadRGBAImage(R.mipmap.img_2380);
         Bitmap b = loadRGBAImage(R.mipmap.huge);
         myGLSurfaceView.setAspectRatio(b.getWidth(), b.getHeight());
         myGLSurfaceView.setRenderMode(RENDERMODE_CONTINUOUSLY);
