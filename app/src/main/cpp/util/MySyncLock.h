@@ -7,6 +7,8 @@
 #ifndef STUDYOPENGL3_0_MYSYNCLOCK_H
 #define STUDYOPENGL3_0_MYSYNCLOCK_H
 
+#include "LogUtils.h"
+
 class MySyncLock {
 public:
     MySyncLock() {
@@ -31,12 +33,13 @@ public:
     }
 
     int Lock() {
+        LOGCATI("MySyncLock::Lock()                                             🔐-加锁\n");
         return pthread_mutex_lock(&m_mutex);
     }
 
     int UnLock() {
+        LOGCATI("MySyncLock::UnLock()                                           🔓-解锁\n");
         return pthread_mutex_unlock(&m_mutex);
-
     }
 
     int TryLock() {
@@ -55,6 +58,11 @@ public:
         if (pLock != NULL) {
             m_pLock->Lock();
         }
+    }
+
+    ~ScopedSyncLock() {
+        if (m_pLock != NULL)
+            m_pLock->UnLock();
     }
 
 private:
