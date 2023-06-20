@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 import com.ya.opengl.studyopengl30.activity.AVO_VBO_Activity;
 import com.ya.opengl.studyopengl30.activity.AvatarActivity;
@@ -22,6 +23,7 @@ import com.ya.opengl.studyopengl30.activity.MRTActivity;
 import com.ya.opengl.studyopengl30.activity.MultiLightsActivity;
 import com.ya.opengl.studyopengl30.activity.PBOActivity;
 import com.ya.opengl.studyopengl30.activity.ParticlesActivity;
+import com.ya.opengl.studyopengl30.activity.RotaryHeadActivity;
 import com.ya.opengl.studyopengl30.activity.ScratchCardActivity;
 import com.ya.opengl.studyopengl30.activity.ShockWaveActivity;
 import com.ya.opengl.studyopengl30.activity.SkyBoxActivity;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private static final String TAG = "MainActivity: ";
+
+    ScrollView scrollView;
 
     Button btnDrawTriangle;
     Button btnTextureMapping;
@@ -67,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnAvatarRender;
     Button btnScratchCardRender;
     Button btnVisualizeAudioRender;
+    Button btnRotaryHeadRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -106,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAvatarRender = findViewById(R.id.btn_avatar_render);
         btnScratchCardRender = findViewById(R.id.btn_scratch_card_render);
         btnVisualizeAudioRender = findViewById(R.id.btn_visualize_audio_render);
+        btnRotaryHeadRender = findViewById(R.id.btn_rotary_head_render);
+
 
         buttonList.add(btnDrawTriangle);
         buttonList.add(btnTextureMapping);
@@ -130,6 +137,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnAvatarRender);
         buttonList.add(btnScratchCardRender);
         buttonList.add(btnVisualizeAudioRender);
+        buttonList.add(btnRotaryHeadRender);
+        scrollView = findViewById(R.id.sv_main);
+
 
     }
 
@@ -137,6 +147,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (Button button : buttonList) {
             button.setOnClickListener(this);
         }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.smoothScrollTo(0, scrollView.getBottom());
+            }
+        });
+
     }
 
     @Override
@@ -228,7 +252,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 toAnotherActivity(VisualizeAudioActivity.class);
                 break;
 
-
+            case R.id.btn_rotary_head_render:
+                // 头部晃动
+                toAnotherActivity(RotaryHeadActivity.class);
+                break;
             default:
         }
     }

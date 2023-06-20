@@ -1,9 +1,11 @@
 package com.ya.opengl.studyopengl30.activity;
 
+import static android.opengl.GLSurfaceView.RENDERMODE_CONTINUOUSLY;
 import static com.ya.opengl.studyopengl30.MyGLSurfaceView.IMAGE_FORMAT_RGBA;
 import static com.ya.opengl.studyopengl30.render.NativeRender.SAMPLE_TYPE;
+import static com.ya.opengl.studyopengl30.render.NativeRender.SAMPLE_TYPE_KEY_BIG_HEAD;
+import static com.ya.opengl.studyopengl30.render.NativeRender.SAMPLE_TYPE_KEY_ROTARY_HEAD;
 import static com.ya.opengl.studyopengl30.render.NativeRender.SAMPLE_TYPE_PBO;
-import static com.ya.opengl.studyopengl30.render.NativeRender.SAMPLE_TYPE_STENCIL_TESTING;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-public class PBOActivity extends AppCompatActivity {
+public class RotaryHeadActivity extends AppCompatActivity {
+
 
     private MyGLSurfaceView myGLSurfaceView;
     private GLRender        glRender;
@@ -54,18 +57,18 @@ public class PBOActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pboactivity);
-        myGLSurfaceView = findViewById(R.id.mgl_pbo_render);
+        setContentView(R.layout.activity_rotary_head);
+
+        myGLSurfaceView = findViewById(R.id.mgl_rotary_head_render);
         glRender = new GLRender();
         glRender.init();
 
-        glRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE_PBO, 0);
+        glRender.setParamsInt(SAMPLE_TYPE, SAMPLE_TYPE_KEY_ROTARY_HEAD, 0);
         myGLSurfaceView.setNativeRender(glRender.getNativeRender());
-        loadRGBAImage(R.mipmap.front);
-
+//        Bitmap b = loadRGBAImage(R.mipmap.img_2380);
+        Bitmap b = loadRGBAImage(R.mipmap.huge);
+        myGLSurfaceView.setAspectRatio(b.getWidth(), b.getHeight());
+        myGLSurfaceView.setRenderMode(RENDERMODE_CONTINUOUSLY);
         myGLSurfaceView.requestRender();
     }
-
-
-
 }

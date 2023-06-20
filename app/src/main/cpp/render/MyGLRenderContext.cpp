@@ -9,7 +9,7 @@
 MyGLRenderContext *MyGLRenderContext::m_pContext = nullptr;
 
 MyGLRenderContext::MyGLRenderContext() {
-    m_pCurSample = new TriangleSample;
+    m_pCurSample    = new TriangleSample;
     m_pBeforeSample = nullptr;
 
 }
@@ -18,7 +18,7 @@ MyGLRenderContext::MyGLRenderContext() {
 void MyGLRenderContext::SetImageData(int format, int width, int height, uint8_t *pData) {
     NativeImage nativeImage;
     nativeImage.format = format;
-    nativeImage.width = width;
+    nativeImage.width  = width;
     nativeImage.height = height;
     nativeImage.ppPlane[0] = pData;
     switch (format) {
@@ -49,7 +49,7 @@ void MyGLRenderContext::SetImageDataWithIndex(int index, int format, int width, 
             index, format, width, height, pData);
     NativeImage nativeImage;
     nativeImage.format = format;
-    nativeImage.width = width;
+    nativeImage.width  = width;
     nativeImage.height = height;
     nativeImage.ppPlane[0] = pData;
 
@@ -153,6 +153,11 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
             case SAMPLE_TYPE_KEY_VISUALIZE_AUDIO:
                 m_pCurSample = new VisualizeAudioSample();
                 break;
+
+            case SAMPLE_TYPE_KEY_RATARY_HEAD:
+                m_pCurSample = new RotaryHeadSample();
+                break;
+
 
             default:
                 break;

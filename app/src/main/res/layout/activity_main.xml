@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <ScrollView
+        android:id="@+id/sv_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -311,6 +312,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音频可视化"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.594" />
+            <Button
+                android:id="@+id/btn_rotary_head_render"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="头部晃动"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
