@@ -27,6 +27,7 @@ public:
     virtual void UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY);
 
     void UpdateMVPMatrix(glm::mat4 &mvpMatrix, int angleX, int angleY, float ratio);
+    virtual void UpdateEyeOffset(float offset);
 
 private:
     GLuint      m_TextureId;
@@ -41,6 +42,8 @@ private:
     int   m_AngleY;
     float m_ScaleX;
     float m_ScaleY;
+
+    float m_EyeOffset;
 
     /**
      * frame index 是干嘛的？

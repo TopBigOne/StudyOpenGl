@@ -105,6 +105,7 @@ public:
     virtual void UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY) {}
 
     virtual void SetTouchLocation(float x, float y) {}
+    virtual void UpdateEyeOffset(float offset) {}
 
     virtual void SetGravityXY(float x, float y) {}
 

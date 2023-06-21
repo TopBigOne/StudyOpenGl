@@ -105,6 +105,11 @@ native_UpdateTransformMatrix(JNIEnv *env, jobject instance, jfloat rotateX, jflo
     MyGLRenderContext::GetInstance()->UpdateTransformMatrix(rotateX, rotateY, scaleX, scaleY);
 }
 
+JNIEXPORT void JNICALL
+native_UpdateEyeOffset(JNIEnv *env, jobject instance, jfloat eyeOffset) {
+    MyGLRenderContext::GetInstance()->UpdateEyeOffset(eyeOffset);
+}
+
 
 
 JNIEXPORT void JNICALL native_EglRenderInit(JNIEnv *env, jobject instance) {
@@ -166,6 +171,7 @@ static JNINativeMethod g_RenderMethods[] = {
         {"native_OnSurfaceCreated", "()V",      (void *) (native_OnSurfaceCreated)},
         {"native_OnSurfaceChanged", "(II)V",    (void *) (native_OnSurfaceChanged)},
         {"native_OnDrawFrame",      "()V",      (void *) (native_OnDrawFrame)},
+        {"native_UpdateEyeOffset",      "(F)V",      (void *) (native_UpdateEyeOffset)},
 
 };
 

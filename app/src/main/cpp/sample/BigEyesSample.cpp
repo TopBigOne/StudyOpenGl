@@ -22,8 +22,9 @@ BigEyesSample::BigEyesSample() {
     m_AngleX = 0;
     m_AngleY = 0;
 
-    m_ScaleX = 1.0f;
-    m_ScaleY = 1.0f;
+    m_ScaleX    = 1.0f;
+    m_ScaleY    = 1.0f;
+    m_EyeOffset = 0.0f;
 
     m_FrameIndex = 0;
 }
@@ -199,9 +200,8 @@ void BigEyesSample::Draw(int screenW, int screenH) {
     float offset = (m_FrameIndex % 100) * 1.0f / 100;
     offset = (m_FrameIndex / 100) % 2 == 1 ? (1 - offset) : offset;
     offset = 0.25;
-
     LOGCATI("BigEyesSample::Draw() offset : %f", offset);
-    GLUtils::setFloat(m_ProgramObj, "u_ScaleRatio", offset * 1.6f);
+    GLUtils::setFloat(m_ProgramObj, "u_ScaleRatio", m_EyeOffset * 1.6f);
     GLUtils::setFloat(m_ProgramObj, "u_Radius", EyeRadius);
     GLUtils::setVec2(m_ProgramObj, "u_LeftEyeCenterPos", LeftEyePoint[0], LeftEyePoint[1]);
     GLUtils::setVec2(m_ProgramObj, "u_RightEyeCenterPos", RightEyePoint[0], RightEyePoint[1]);
@@ -225,7 +225,7 @@ void BigEyesSample::Destroy() {
  * @param ratio 宽高比
  * */
 void BigEyesSample::UpdateMVPMatrix(glm::mat4 &mvpMatrix, int angleX, int angleY, float ratio) {
-    LOGCATE("BigEyesSample::UpdateMVPMatrix angleX = %d, angleY = %d, ratio = %f", angleX, angleY,
+    LOGCATI("BigEyesSample::UpdateMVPMatrix angleX = %d, angleY = %d, ratio = %f", angleX, angleY,
             ratio);
     angleX = angleX % 360;
     angleY = angleY % 360;
@@ -265,4 +265,9 @@ BigEyesSample::UpdateTransformMatrix(float rotateX, float rotateY, float scaleX,
     m_AngleY = static_cast<int>(rotateY);
     m_ScaleX = scaleX;
     m_ScaleY = scaleY;
+}
+
+void BigEyesSample::UpdateEyeOffset(float offset) {
+    m_EyeOffset = offset;
+    LOGCATI("BigEyesSample::UpdateEyeOffset m_EyeOffset = %f", m_EyeOffset);
 }

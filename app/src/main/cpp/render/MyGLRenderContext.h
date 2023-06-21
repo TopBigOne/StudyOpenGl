@@ -55,6 +55,8 @@ public:
 
     void SetParamsFloat(int paramType, float value0, float value1);
 
+    void UpdateEyeOffset(float offset);
+
     void SetParamsShortArr(short *const pShortArr, int arrSize);
 
     void UpdateTransformMatrix(float rotateX, float rotateY, float scaleX, float scaleY);

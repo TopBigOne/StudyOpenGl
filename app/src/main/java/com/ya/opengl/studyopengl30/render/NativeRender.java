@@ -89,6 +89,8 @@ public class NativeRender {
 
     public native void native_OnDrawFrame();
 
+    public native void native_UpdateEyeOffset(float offset);
+
 
     public int getSampleType() {
         Log.i(TAG, "getSampleType: step 2");

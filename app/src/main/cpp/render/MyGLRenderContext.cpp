@@ -262,3 +262,10 @@ MyGLRenderContext::~MyGLRenderContext() {
 
 
 }
+
+void MyGLRenderContext::UpdateEyeOffset(float offset) {
+    if (m_pCurSample){
+        m_pCurSample->UpdateEyeOffset(offset);
+    }
+
+}
