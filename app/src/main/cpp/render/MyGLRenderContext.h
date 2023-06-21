@@ -35,6 +35,7 @@
 #include "ScratchCardSample.h"
 #include "VisualizeAudioSample.h"
 #include "RotaryHeadSample.h"
+#include "BigEyesSample.h"
 
 
 #include <ShockWaveSample.h>

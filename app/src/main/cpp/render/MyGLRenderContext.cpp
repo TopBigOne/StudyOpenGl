@@ -157,6 +157,9 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
             case SAMPLE_TYPE_KEY_RATARY_HEAD:
                 m_pCurSample = new RotaryHeadSample();
                 break;
+            case SAMPLE_TYPE_KEY_BIG_EYES:
+                m_pCurSample = new BigEyesSample();
+                break;
 
 
             default:

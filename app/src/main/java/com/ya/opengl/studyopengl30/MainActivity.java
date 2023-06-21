@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnScratchCardRender;
     Button btnVisualizeAudioRender;
     Button btnRotaryHeadRender;
+    Button btnBigEyesRender;
 
 
     List<Button> buttonList = new ArrayList<>();
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void initView() {
+        scrollView = findViewById(R.id.sv_main);
+
         btnDrawTriangle = findViewById(R.id.btn_draw_triangle);
         btnTextureMapping = findViewById(R.id.btn_texture_mapping);
         btnYUVRender = findViewById(R.id.btn_yuv_render);
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnScratchCardRender = findViewById(R.id.btn_scratch_card_render);
         btnVisualizeAudioRender = findViewById(R.id.btn_visualize_audio_render);
         btnRotaryHeadRender = findViewById(R.id.btn_rotary_head_render);
+        btnBigEyesRender = findViewById(R.id.btn_big_eye_render);
 
 
         buttonList.add(btnDrawTriangle);
@@ -116,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnScratchCardRender);
         buttonList.add(btnVisualizeAudioRender);
         buttonList.add(btnRotaryHeadRender);
-        scrollView = findViewById(R.id.sv_main);
+        buttonList.add(btnBigEyesRender);
 
 
     }
@@ -233,6 +237,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 头部晃动
                 toAnotherActivity(RotaryHeadActivity.class);
                 break;
+
+            case R.id.btn_big_eye_render:
+                // 头部晃动
+                toAnotherActivity(BigEyesActivity.class);
+                break;
+
             default:
         }
 
