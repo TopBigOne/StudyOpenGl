@@ -52,6 +52,9 @@ public:
     static void setVec2(GLuint programId, const std::string &name, float x, float y) {
         glUniform2f(glGetUniformLocation(programId, name.c_str()), x, y);
     }
+    static void setVec4(GLuint programId, const std::string &name, float x, float y, float z, float w) {
+        glUniform4f(glGetUniformLocation(programId, name.c_str()), x, y, z, w);
+    }
 
 
 

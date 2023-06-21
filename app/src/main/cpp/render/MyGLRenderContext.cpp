@@ -161,6 +161,9 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 m_pCurSample = new BigEyesSample();
                 break;
 
+            case SAMPLE_TYPE_KEY_FACE_SLENDER:
+                m_pCurSample = new FaceSlenderSample();
+
 
             default:
                 break;
@@ -264,7 +267,7 @@ MyGLRenderContext::~MyGLRenderContext() {
 }
 
 void MyGLRenderContext::UpdateEyeOffset(float offset) {
-    if (m_pCurSample){
+    if (m_pCurSample) {
         m_pCurSample->UpdateEyeOffset(offset);
     }
 

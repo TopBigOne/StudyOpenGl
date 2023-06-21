@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnVisualizeAudioRender;
     Button btnRotaryHeadRender;
     Button btnBigEyesRender;
-
+    Button btnFaceSlenderRender;
 
     List<Button> buttonList = new ArrayList<>();
 
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnVisualizeAudioRender = findViewById(R.id.btn_visualize_audio_render);
         btnRotaryHeadRender = findViewById(R.id.btn_rotary_head_render);
         btnBigEyesRender = findViewById(R.id.btn_big_eye_render);
+        btnFaceSlenderRender = findViewById(R.id.btn_face_slender_render);
 
 
         buttonList.add(btnDrawTriangle);
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnVisualizeAudioRender);
         buttonList.add(btnRotaryHeadRender);
         buttonList.add(btnBigEyesRender);
+        buttonList.add(btnFaceSlenderRender);
 
 
     }
@@ -239,8 +241,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_big_eye_render:
-                // 头部晃动
+                //  大眼
                 toAnotherActivity(BigEyesActivity.class);
+                break;
+            case R.id.btn_face_slender_render:
+                //  瘦脸
+                toAnotherActivity(FaceSlenderActivity.class);
                 break;
 
             default:

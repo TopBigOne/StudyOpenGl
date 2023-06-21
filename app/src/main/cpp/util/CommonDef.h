@@ -25,7 +25,7 @@ typedef struct _tag_PointF {
 
 } PointF;
 
-class PointFUtil {
+class PointUtil {
 public:
     /**
      * 2 点之间的距离
