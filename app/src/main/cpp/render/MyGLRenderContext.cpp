@@ -163,6 +163,10 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
 
             case SAMPLE_TYPE_KEY_FACE_SLENDER:
                 m_pCurSample = new FaceSlenderSample();
+                break;
+            case SAMPLE_TYPE_KEY_BEZIER_CURVE:
+                m_pCurSample = new BezierCurveSample();
+                break;
 
 
             default:

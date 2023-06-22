@@ -38,6 +38,7 @@
 #include "BigEyesSample.h"
 #include <ShockWaveSample.h>
 #include <FaceSlenderSample.h>
+#include <BezierCurveSample.h>
 
 class MyGLRenderContext { // implicit instantiation of undefined template
 public:

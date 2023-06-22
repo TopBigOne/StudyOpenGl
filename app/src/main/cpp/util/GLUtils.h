@@ -57,6 +57,11 @@ public:
     }
 
 
+    static void setVec4(GLuint programId, const std::string &name, const glm::vec4 &value) {
+        glUniform4fv(glGetUniformLocation(programId, name.c_str()), 1, &value[0]);
+    }
+
+
 
     static glm::vec3 texCoordToVertexCoord(glm::vec2 &texCoord) {
         return glm::vec3(2 * texCoord.x - 1, 1 - 2 * texCoord.y, 0);

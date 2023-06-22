@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnRotaryHeadRender;
     Button btnBigEyesRender;
     Button btnFaceSlenderRender;
+    Button btnBezierCurveRender;
 
     List<Button> buttonList = new ArrayList<>();
 
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRotaryHeadRender = findViewById(R.id.btn_rotary_head_render);
         btnBigEyesRender = findViewById(R.id.btn_big_eye_render);
         btnFaceSlenderRender = findViewById(R.id.btn_face_slender_render);
+        btnBezierCurveRender = findViewById(R.id.btn_bezier_curve_render);
 
 
         buttonList.add(btnDrawTriangle);
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnRotaryHeadRender);
         buttonList.add(btnBigEyesRender);
         buttonList.add(btnFaceSlenderRender);
+        buttonList.add(btnBezierCurveRender);
 
 
     }
@@ -247,6 +250,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_face_slender_render:
                 //  瘦脸
                 toAnotherActivity(FaceSlenderActivity.class);
+                break;
+            case R.id.btn_bezier_curve_render:
+                toAnotherActivity(BezierCurveActivity.class);
                 break;
 
             default:

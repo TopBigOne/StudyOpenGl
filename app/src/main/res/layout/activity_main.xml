@@ -307,6 +307,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.594" />
+
             <Button
                 android:id="@+id/btn_visualize_audio_render"
                 android:layout_width="wrap_content"
@@ -319,6 +320,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.594" />
+
             <Button
                 android:id="@+id/btn_rotary_head_render"
                 android:layout_width="wrap_content"
@@ -331,6 +333,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.594" />
+
             <Button
                 android:id="@+id/btn_big_eye_render"
                 android:layout_width="wrap_content"
@@ -343,11 +346,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.594" />
+
             <Button
                 android:id="@+id/btn_face_slender_render"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="瘦脸"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.594" />
+
+            <Button
+                android:id="@+id/btn_bezier_curve_render"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="贝塞尔曲线"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
