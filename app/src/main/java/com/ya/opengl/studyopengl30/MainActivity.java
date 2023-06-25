@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnBigEyesRender;
     Button btnFaceSlenderRender;
     Button btnBezierCurveRender;
+    Button btnFboLegRender;
 
     List<Button> buttonList = new ArrayList<>();
 
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnBigEyesRender = findViewById(R.id.btn_big_eye_render);
         btnFaceSlenderRender = findViewById(R.id.btn_face_slender_render);
         btnBezierCurveRender = findViewById(R.id.btn_bezier_curve_render);
+        btnFboLegRender = findViewById(R.id.btn_fbo_leg_render);
 
 
         buttonList.add(btnDrawTriangle);
@@ -126,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonList.add(btnBigEyesRender);
         buttonList.add(btnFaceSlenderRender);
         buttonList.add(btnBezierCurveRender);
+        buttonList.add(btnFboLegRender);
 
 
     }
@@ -253,6 +256,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_bezier_curve_render:
                 toAnotherActivity(BezierCurveActivity.class);
+                break;
+            case R.id.btn_fbo_leg_render:
+                // fbo : 大长腿.
+                toAnotherActivity(FBOLegLengthenActivity.class);
                 break;
 
             default:

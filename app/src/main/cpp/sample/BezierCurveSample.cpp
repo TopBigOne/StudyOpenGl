@@ -167,6 +167,7 @@ void BezierCurveSample::LoadImage(NativeImage *pImage) {
 void BezierCurveSample::Draw(int screenW, int screenH) {
     LOGCATE("BezierCurveSample::Draw()");
 
+
     if (m_pCoordSystemSample != nullptr) {
         //m_pCoordSystemSample->Draw(screenW, screenH);
     }
@@ -176,9 +177,10 @@ void BezierCurveSample::Draw(int screenW, int screenH) {
 
     if (m_ProgramObj == GL_NONE) return;
 
+    auto ratio = static_cast<float>(screenW / screenH);
     m_FrameIndex++;
 
-    UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, (float) screenW / screenH);
+    UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, ratio);
 
     // Use the program object
     glUseProgram(m_ProgramObj);
@@ -208,75 +210,77 @@ void BezierCurveSample::Draw(int screenW, int screenH) {
 
     DrawArray();
 
-    //draw two
-    int newIndex = m_FrameIndex + 33;
-    offset = (newIndex % 100) * 1.0f / 100;
-    offset = (newIndex / 100) % 2 == 1 ? (1 - offset) : offset;
-    GLUtils::setFloat(m_ProgramObj, "u_Offset", offset);
-    GLUtils::setVec4(m_ProgramObj, "u_Color", glm::vec4(0.0f, 0.3f, 0.8f, 1.0f));
-    GLUtils::setVec4(m_ProgramObj, "u_ControlPoints", glm::vec4(-0.8f, 0.99f,
-                                                                0.0f, 0.0f));
-    UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, (float) screenW / screenH);
-    GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
+    /*
 
-    DrawArray();
+     //draw two
+     int newIndex = m_FrameIndex + 33;
+     offset = (newIndex % 100) * 1.0f / 100;
+     offset = (newIndex / 100) % 2 == 1 ? (1 - offset) : offset;
+     GLUtils::setFloat(m_ProgramObj, "u_Offset", offset);
+     GLUtils::setVec4(m_ProgramObj, "u_Color", glm::vec4(0.0f, 0.3f, 0.8f, 1.0f));
+     GLUtils::setVec4(m_ProgramObj, "u_ControlPoints", glm::vec4(-0.8f, 0.99f,
+                                                                 0.0f, 0.0f));
+     UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, (float) screenW / screenH);
+     GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
 
-    UpdateMVPMatrix(m_MVPMatrix, 180, m_AngleY, (float) screenW / screenH);
-    GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
+     DrawArray();
 
-    DrawArray();
+     UpdateMVPMatrix(m_MVPMatrix, 180, m_AngleY, (float) screenW / screenH);
+     GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
 
-    //draw three
-    newIndex = newIndex + 33;
-    offset   = (newIndex % 100) * 1.0f / 100;
-    offset   = (newIndex / 100) % 2 == 1 ? (1 - offset) : offset;
-    GLUtils::setFloat(m_ProgramObj, "u_Offset", offset);
-    GLUtils::setVec4(m_ProgramObj, "u_Color", glm::vec4(0.1f, 0.6f, 0.3f, 1.0f));
-    GLUtils::setVec4(m_ProgramObj, "u_ControlPoints", glm::vec4(0.0f, 0.0f, 0.8f, 0.99f));
-    UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, (float) screenW / screenH);
-    GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
+     DrawArray();
 
-    DrawArray();
+     //draw three
+     newIndex = newIndex + 33;
+     offset   = (newIndex % 100) * 1.0f / 100;
+     offset   = (newIndex / 100) % 2 == 1 ? (1 - offset) : offset;
+     GLUtils::setFloat(m_ProgramObj, "u_Offset", offset);
+     GLUtils::setVec4(m_ProgramObj, "u_Color", glm::vec4(0.1f, 0.6f, 0.3f, 1.0f));
+     GLUtils::setVec4(m_ProgramObj, "u_ControlPoints", glm::vec4(0.0f, 0.0f, 0.8f, 0.99f));
+     UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, (float) screenW / screenH);
+     GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
 
-    UpdateMVPMatrix(m_MVPMatrix, 180, m_AngleY, (float) screenW / screenH);
-    GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
+     DrawArray();
 
-    DrawArray();
+     UpdateMVPMatrix(m_MVPMatrix, 180, m_AngleY, (float) screenW / screenH);
+     GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
 
-    //draw four
-    newIndex = newIndex + 33;
-    offset   = (newIndex % 100) * 1.0f / 100;
-    offset   = (newIndex / 100) % 2 == 1 ? (1 - offset) : offset;
-    GLUtils::setFloat(m_ProgramObj, "u_Offset", offset);
-    GLUtils::setVec4(m_ProgramObj, "u_Color", glm::vec4(1.0f, 0.0f, 0.3f, 1.0f));
-    GLUtils::setVec4(m_ProgramObj, "u_ControlPoints", glm::vec4(-0.2f, 0.99f, 0.0f, 0.0f));
-    UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, (float) screenW / screenH);
-    GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
+     DrawArray();
 
-    DrawArray();
+     //draw four
+     newIndex = newIndex + 33;
+     offset   = (newIndex % 100) * 1.0f / 100;
+     offset   = (newIndex / 100) % 2 == 1 ? (1 - offset) : offset;
+     GLUtils::setFloat(m_ProgramObj, "u_Offset", offset);
+     GLUtils::setVec4(m_ProgramObj, "u_Color", glm::vec4(1.0f, 0.0f, 0.3f, 1.0f));
+     GLUtils::setVec4(m_ProgramObj, "u_ControlPoints", glm::vec4(-0.2f, 0.99f, 0.0f, 0.0f));
+     UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, (float) screenW / screenH);
+     GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
 
-    UpdateMVPMatrix(m_MVPMatrix, 180, m_AngleY, (float) screenW / screenH);
-    GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
+     DrawArray();
 
-    DrawArray();
+     UpdateMVPMatrix(m_MVPMatrix, 180, m_AngleY, (float) screenW / screenH);
+     GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
 
-    //draw five
-    newIndex = newIndex + 33;
-    offset   = (newIndex % 100) * 1.0f / 100;
-    offset   = (newIndex / 100) % 2 == 1 ? (1 - offset) : offset;
-    GLUtils::setFloat(m_ProgramObj, "u_Offset", offset);
-    GLUtils::setVec4(m_ProgramObj, "u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-    GLUtils::setVec4(m_ProgramObj, "u_ControlPoints", glm::vec4(0.0f, 0.0f, 0.2f, 0.99f));
-    UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, (float) screenW / screenH);
-    GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
+     DrawArray();
 
-    DrawArray();
+     //draw five
+     newIndex = newIndex + 33;
+     offset   = (newIndex % 100) * 1.0f / 100;
+     offset   = (newIndex / 100) % 2 == 1 ? (1 - offset) : offset;
+     GLUtils::setFloat(m_ProgramObj, "u_Offset", offset);
+     GLUtils::setVec4(m_ProgramObj, "u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+     GLUtils::setVec4(m_ProgramObj, "u_ControlPoints", glm::vec4(0.0f, 0.0f, 0.2f, 0.99f));
+     UpdateMVPMatrix(m_MVPMatrix, m_AngleX, m_AngleY, (float) screenW / screenH);
+     GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
 
-    UpdateMVPMatrix(m_MVPMatrix, 180, m_AngleY, (float) screenW / screenH);
-    GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
+     DrawArray();
 
-    DrawArray();
+     UpdateMVPMatrix(m_MVPMatrix, 180, m_AngleY, (float) screenW / screenH);
+     GLUtils::setMat4(m_ProgramObj, "u_MVPMatrix", m_MVPMatrix);
 
+     DrawArray();
+ */
     glDisable(GL_BLEND);
 
 }

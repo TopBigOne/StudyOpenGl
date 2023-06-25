@@ -98,7 +98,7 @@ void MyGLRenderContext::SetParamsInt(int paramType, int value0, int value1) {
                 m_pCurSample = new FBOBlitSample();
                 break;
             case SAMPLE_TYPE_KEY_FBO_LEG_LENGTHEN:
-                //  m_pCurSample = new FBOLegLengthenSample();
+                  m_pCurSample = new FBOLegLengthenSample();
             case SAMPLE_TYPE_KEY_COORD_SYSTEM:
                 m_pCurSample = new CoordSystemSample();
                 break;
